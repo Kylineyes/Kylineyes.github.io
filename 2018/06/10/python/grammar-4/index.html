@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Python3 学习之路(4) 字符串 | KylinEyes&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="字符串在Python3中，字符串在内存中的存储格式均是Unicode。且其实不存在单个字符，单个字符也被视为字符串。 编码与解码对于许多编程语言来说，字符串的各类编码是一个很让人难以处理的问题，在Python中，用了很好的封装方式，字符串的编码与解码不再是令人头疼的问题。 encode()python使用encode()方法来进行字符串的编码。这个方法将一个字符串编码成指定编码格式，返回值是byt">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3 学习之路(4) 字符串">
+<meta property="og:url" content="http://yoursite.com/2018/06/10/python/grammar-4/index.html">
+<meta property="og:site_name" content="KylinEyes&#39;s Blog">
+<meta property="og:description" content="字符串在Python3中，字符串在内存中的存储格式均是Unicode。且其实不存在单个字符，单个字符也被视为字符串。 编码与解码对于许多编程语言来说，字符串的各类编码是一个很让人难以处理的问题，在Python中，用了很好的封装方式，字符串的编码与解码不再是令人头疼的问题。 encode()python使用encode()方法来进行字符串的编码。这个方法将一个字符串编码成指定编码格式，返回值是byt">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/python/Python-thumbnail.png">
+<meta property="og:updated_time" content="2018-07-10T17:31:12.333Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3 学习之路(4) 字符串">
+<meta name="twitter:description" content="字符串在Python3中，字符串在内存中的存储格式均是Unicode。且其实不存在单个字符，单个字符也被视为字符串。 编码与解码对于许多编程语言来说，字符串的各类编码是一个很让人难以处理的问题，在Python中，用了很好的封装方式，字符串的编码与解码不再是令人头疼的问题。 encode()python使用encode()方法来进行字符串的编码。这个方法将一个字符串编码成指定编码格式，返回值是byt">
+<meta name="twitter:image" content="http://yoursite.com/images/python/Python-thumbnail.png">
+    
+
+    
+        <link rel="alternate" href="/" title="KylinEyes&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">KylinEyes&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/images/Personal/Blog.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/images/Personal/Blog.png" />
+            <h2 id="name">Kylineyes</h2>
+            <h3 id="title">Student</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>ShenZhen, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Kylineyes">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                14
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                7
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <!--div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div-->
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-python/grammar-4" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="/images/python/Python-banner.png" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Python3 学习之路(4) 字符串
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/06/10/python/grammar-4/">
+            <time datetime="2018-06-10T08:19:34.000Z" itemprop="datePublished">2018-06-10</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Python/">Python</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Python/">Python</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#字符串"><span class="toc-number">1.</span> <span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编码与解码"><span class="toc-number">1.1.</span> <span class="toc-text">编码与解码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#encode"><span class="toc-number">1.1.1.</span> <span class="toc-text">encode()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#decode"><span class="toc-number">1.1.2.</span> <span class="toc-text">decode()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#转义字符表"><span class="toc-number">1.2.</span> <span class="toc-text">转义字符表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串运算符"><span class="toc-number">1.3.</span> <span class="toc-text">字符串运算符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#格式化字符串"><span class="toc-number">1.4.</span> <span class="toc-text">格式化字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#format"><span class="toc-number">1.4.1.</span> <span class="toc-text">format</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串内建函数"><span class="toc-number">1.5.</span> <span class="toc-text">字符串内建函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#capitalize"><span class="toc-number">1.5.1.</span> <span class="toc-text">capitalize()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#center-width-fillchar"><span class="toc-number">1.5.2.</span> <span class="toc-text">center(width, fillchar)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#count-str-beg-0-end-len-string"><span class="toc-number">1.5.3.</span> <span class="toc-text">count(str, beg= 0,end=len(string))</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#startswith-endswith-suffix-beg-0-end-len-string"><span class="toc-number">1.5.4.</span> <span class="toc-text">startswith/endswith(suffix, beg=0, end=len(string))</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#expandtabs-tabsize-8"><span class="toc-number">1.5.5.</span> <span class="toc-text">expandtabs(tabsize=8)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#find-str-beg-0-end-len-string"><span class="toc-number">1.5.6.</span> <span class="toc-text">find(str, beg=0 end=len(string))</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index-str-beg-0-end-len-string"><span class="toc-number">1.5.7.</span> <span class="toc-text">index(str, beg=0, end=len(string))</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalnum"><span class="toc-number">1.5.8.</span> <span class="toc-text">isalnum()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isalpha"><span class="toc-number">1.5.9.</span> <span class="toc-text">isalpha()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isdigit-isdecimal-isnumeric"><span class="toc-number">1.5.10.</span> <span class="toc-text">isdigit() isdecimal() isnumeric()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#isspace"><span class="toc-number">1.5.11.</span> <span class="toc-text">isspace()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join-seq"><span class="toc-number">1.5.12.</span> <span class="toc-text">join(seq)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#len-string"><span class="toc-number">1.5.13.</span> <span class="toc-text">len(string)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ljust-width-fillchar"><span class="toc-number">1.5.14.</span> <span class="toc-text">ljust(width[, fillchar])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lower"><span class="toc-number">1.5.15.</span> <span class="toc-text">lower()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace-old-new-max"><span class="toc-number">1.5.16.</span> <span class="toc-text">replace(old, new [, max])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#split-str-”-“-num-string-count-str"><span class="toc-number">1.5.17.</span> <span class="toc-text">split(str=” “, num=string.count(str))</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#splitlines-keepends-False"><span class="toc-number">1.5.18.</span> <span class="toc-text">splitlines(keepends=False)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#引用"><span class="toc-number">2.</span> <span class="toc-text">引用</span></a></li></ol>
+                </div>
+            
+            <h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>在Python3中，字符串在内存中的存储格式均是Unicode。且其实不存在单个字符，单个字符也被视为字符串。</p>
+<h2 id="编码与解码"><a href="#编码与解码" class="headerlink" title="编码与解码"></a>编码与解码</h2><p>对于许多编程语言来说，字符串的各类编码是一个很让人难以处理的问题，在Python中，用了很好的封装方式，字符串的编码与解码不再是令人头疼的问题。</p>
+<h3 id="encode"><a href="#encode" class="headerlink" title="encode()"></a>encode()</h3><p>python使用encode()方法来进行字符串的编码。这个方法将一个字符串编码成指定编码格式，返回值是bytes类型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bytes_string = <span class="string">'中文'</span>.encode(<span class="string">'utf-8'</span>)</span><br></pre></td></tr></table></figure>
+<p>如果你对含有超出ASCII编码外的字符（比如说，中文）的字符串编码为ASCII，则Python会报错，解决方法是告知Python如何进行处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bytes_string = <span class="string">'中文CN'</span>.encode(<span class="string">'ascii'</span>,errors=<span class="string">'ignore'</span>)</span><br></pre></td></tr></table></figure>
+<p>这里我将encode()中errors参数的值设置为’ignore’，即对错误的字节进行忽略，返回值为ASCII编码的bytes，意为CN。</p>
+<h3 id="decode"><a href="#decode" class="headerlink" title="decode()"></a>decode()</h3><p>python使用decode()方法来进行字符串的编码。这个方法将一个bytes根据指定编码格式进行解码，返回值是一个字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">b'\xe4\xb8\xad\xe6\x96\x87'</span>.decode(<span class="string">'utf-8'</span>)</span><br></pre></td></tr></table></figure>
+<p>如果进行上面的encode()实验，很容易知道这里的<strong>b’\xe4\xb8\xad\xe6\x96\x87’</strong>是UTF-8编码格式下的’中文’，这里相当于上面的逆过程。</p>
+<p>同样的，如果bytes里有含有超出指定编码外的字符，Python也会报错，解决方法也是同样告知如何进行处理。</p>
+<h2 id="转义字符表"><a href="#转义字符表" class="headerlink" title="转义字符表"></a>转义字符表</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">转义字符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">(在行尾时)</td>
+<td style="text-align:center">续行符</td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center">反斜杠符号</td>
+</tr>
+<tr>
+<td style="text-align:center">\\’</td>
+<td style="text-align:center">单引号</td>
+</tr>
+<tr>
+<td style="text-align:center">\\”</td>
+<td style="text-align:center">双引号</td>
+</tr>
+<tr>
+<td style="text-align:center">\a</td>
+<td style="text-align:center">响铃</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">退格(Backspace)</td>
+</tr>
+<tr>
+<td style="text-align:center">\e</td>
+<td style="text-align:center">转义</td>
+</tr>
+<tr>
+<td style="text-align:center">\000</td>
+<td style="text-align:center">空</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:center">换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\v</td>
+<td style="text-align:center">纵向制表符</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">横向制表符</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:center">回车</td>
+</tr>
+<tr>
+<td style="text-align:center">\f</td>
+<td style="text-align:center">换页</td>
+</tr>
+<tr>
+<td style="text-align:center">\oyy</td>
+<td style="text-align:center">八进制数，yy代表的字符，例如：\o12代表换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\xyy</td>
+<td style="text-align:center">十六进制数，yy代表的字符，例如：\x0a代表换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\other</td>
+<td style="text-align:center">其它的字符以普通格式输出</td>
+</tr>
+</tbody>
+</table>
+<h2 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h2><p>下表实例变量a值为字符串 “Hello”，b变量值为 “Python”：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作符</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">字符串连接</td>
+<td style="text-align:center">a + b 输出结果： HelloPython</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">重复输出字符串</td>
+<td style="text-align:center">a*2 输出结果：HelloHello</td>
+</tr>
+<tr>
+<td style="text-align:center">[]</td>
+<td style="text-align:center">通过索引获取字符串中字符</td>
+<td style="text-align:center">a[1] 输出结果 <strong>e</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">[ : ]</td>
+<td style="text-align:center">截取字符串中的一部分</td>
+<td style="text-align:center">a[1:4] 输出结果 <strong>ell</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">in</td>
+<td style="text-align:center">成员运算符 - 如果字符串中包含给定的字符返回 True</td>
+<td style="text-align:center"><strong>‘H’ in a</strong> 输出结果 True</td>
+</tr>
+<tr>
+<td style="text-align:center">not in</td>
+<td style="text-align:center">成员运算符 - 如果字符串中不包含给定的字符返回 True</td>
+<td style="text-align:center"><strong>‘M’ not in a</strong> 输出结果 True</td>
+</tr>
+</tbody>
+</table>
+<h2 id="格式化字符串"><a href="#格式化字符串" class="headerlink" title="格式化字符串"></a>格式化字符串</h2><p>Python支持格式化字符串的输出，语法与C语言的printf()函数基本相同。</p>
+<p>python字符串格式化符号:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%c</td>
+<td style="text-align:center">格式化字符及其ASCII码</td>
+</tr>
+<tr>
+<td style="text-align:center">%s</td>
+<td style="text-align:center">格式化字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">%d</td>
+<td style="text-align:center">格式化整数</td>
+</tr>
+<tr>
+<td style="text-align:center">%u</td>
+<td style="text-align:center">格式化无符号整型</td>
+</tr>
+<tr>
+<td style="text-align:center">%o</td>
+<td style="text-align:center">格式化无符号八进制数</td>
+</tr>
+<tr>
+<td style="text-align:center">%x</td>
+<td style="text-align:center">格式化无符号十六进制数</td>
+</tr>
+<tr>
+<td style="text-align:center">%X</td>
+<td style="text-align:center">格式化无符号十六进制数（大写）</td>
+</tr>
+<tr>
+<td style="text-align:center">%f</td>
+<td style="text-align:center">格式化浮点数字，可指定小数点后的精度</td>
+</tr>
+<tr>
+<td style="text-align:center">%e</td>
+<td style="text-align:center">用科学计数法格式化浮点数</td>
+</tr>
+<tr>
+<td style="text-align:center">%E</td>
+<td style="text-align:center">作用同%e，用科学计数法格式化浮点数</td>
+</tr>
+<tr>
+<td style="text-align:center">%g</td>
+<td style="text-align:center">%f和%e的简写</td>
+</tr>
+<tr>
+<td style="text-align:center">%G</td>
+<td style="text-align:center">%f 和 %E 的简写</td>
+</tr>
+<tr>
+<td style="text-align:center">%p</td>
+<td style="text-align:center">用十六进制数格式化变量的地址</td>
+</tr>
+</tbody>
+</table>
+<p>格式化操作符辅助指令:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">定义宽度或者小数点精度</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">用做左对齐</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">在正数前面显示加号( + )</td>
+</tr>
+<tr>
+<td style="text-align:center">#</td>
+<td style="text-align:center">在八进制数前面显示零(‘0’)，在十六进制前面显示’0x’或者’0X’(取决于用的是’x’还是’X’)</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">显示的数字前面填充’0’而不是默认的空格</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">‘%%’输出一个单一的’%’</td>
+</tr>
+<tr>
+<td style="text-align:center">m.n</td>
+<td style="text-align:center">m 是显示的最小总宽度,n 是小数点后的位数(如果可用的话)</td>
+</tr>
+</tbody>
+</table>
+<p>样例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'%c'</span> % <span class="string">'a'</span>) <span class="comment">#输出一个字符，如果不是字符会报错 </span></span><br><span class="line">print(<span class="string">'%x'</span> % <span class="number">16</span>) <span class="comment">#16进制下的16，没有前缀表明进制 </span></span><br><span class="line">print(<span class="string">'%04d'</span> % <span class="number">20</span>) <span class="comment">#输出占位4格的数字，未满4位前补0 </span></span><br><span class="line">print(<span class="string">'%+-4d'</span> % <span class="number">20</span>) <span class="comment">#左对齐的，在正数前面补'+'号的占位4格的数字 </span></span><br><span class="line">print(<span class="string">'%10.6f'</span> % <span class="number">12.98765</span>) <span class="comment">#占位10格(包括'.')，小数点后至少6位的数字</span></span><br></pre></td></tr></table></figure>
+<h3 id="format"><a href="#format" class="headerlink" title="format"></a>format</h3><p>Python2.6开始支持使用format()函数来格式化字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'&#123;0:4d&#125;-&#123;1:02d&#125;-&#123;2:d&#125;'</span>.format(<span class="number">1926</span>,<span class="number">8</span>,<span class="number">17</span>)) <span class="comment">#输出 1926-08-17</span></span><br></pre></td></tr></table></figure>
+<h2 id="字符串内建函数"><a href="#字符串内建函数" class="headerlink" title="字符串内建函数"></a>字符串内建函数</h2><h3 id="capitalize"><a href="#capitalize" class="headerlink" title="capitalize()"></a>capitalize()</h3><p>将字符串的第一个字符转换为大写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">'hello world'</span> </span><br><span class="line">print(str1.capitalize()) <span class="comment"># 返回 Hello world</span></span><br><span class="line">str2 = <span class="string">'123hello world'</span> </span><br><span class="line">print(str2.capitalize()) <span class="comment"># 返回 123hello world</span></span><br></pre></td></tr></table></figure>
+<h3 id="center-width-fillchar"><a href="#center-width-fillchar" class="headerlink" title="center(width, fillchar)"></a>center(width, fillchar)</h3><p>返回一个指定的宽度width居中的字符串，fillchar为填充的字符，默认为空格。</p>
+<h3 id="count-str-beg-0-end-len-string"><a href="#count-str-beg-0-end-len-string" class="headerlink" title="count(str, beg= 0,end=len(string))"></a>count(str, beg= 0,end=len(string))</h3><p>返回 str 在字符串里面出现的次数，如果beg或者end指定则返回指定范围内str出现的次数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="string">'where which why who when'</span> </span><br><span class="line">print(str.count(<span class="string">'wh'</span>)) <span class="comment">#返回5</span></span><br></pre></td></tr></table></figure>
+<h3 id="startswith-endswith-suffix-beg-0-end-len-string"><a href="#startswith-endswith-suffix-beg-0-end-len-string" class="headerlink" title="startswith/endswith(suffix, beg=0, end=len(string))"></a>startswith/endswith(suffix, beg=0, end=len(string))</h3><p>检查字符串是否以suffix开始/结束，如果beg或者end指定则检查指定的范围内是否以suffix开始/结束，如果是，返回True，否则返回False。</p>
+<h3 id="expandtabs-tabsize-8"><a href="#expandtabs-tabsize-8" class="headerlink" title="expandtabs(tabsize=8)"></a>expandtabs(tabsize=8)</h3><p>把字符串 string 中的 tab 符号转为空格，tab 符号默认的空格数是 8 。</p>
+<h3 id="find-str-beg-0-end-len-string"><a href="#find-str-beg-0-end-len-string" class="headerlink" title="find(str, beg=0 end=len(string))"></a>find(str, beg=0 end=len(string))</h3><p>检测str是否包含在字符串中，如果指定范围beg和end，则检查是否包含在指定范围内，如果包含返回开始的索引值，否则返回-1。</p>
+<h3 id="index-str-beg-0-end-len-string"><a href="#index-str-beg-0-end-len-string" class="headerlink" title="index(str, beg=0, end=len(string))"></a>index(str, beg=0, end=len(string))</h3><p>跟find()方法一样，只不过如果str不在字符串中会报一个异常。</p>
+<h3 id="isalnum"><a href="#isalnum" class="headerlink" title="isalnum()"></a>isalnum()</h3><p>如果字符串至少有一个字符并且所有字符都是字母或数字则返回True，否则返回False。</p>
+<h3 id="isalpha"><a href="#isalpha" class="headerlink" title="isalpha()"></a>isalpha()</h3><p>如果字符串至少有一个字符并且所有字符都是字母则返回True，否则返回False。</p>
+<h3 id="isdigit-isdecimal-isnumeric"><a href="#isdigit-isdecimal-isnumeric" class="headerlink" title="isdigit() isdecimal() isnumeric()"></a>isdigit() isdecimal() isnumeric()</h3><p>如果字符串只包含数字则返回True，否则返回False。</p>
+<p>这三个在细节上有很多不同的地方，具体请参照引用3的博文，这里只给出结论。</p>
+<ul>
+<li>isdigit()<br>True: Unicode数字，byte数字（单字节），全角数字（双字节），罗马数字（英文）<br>False: 汉字数字、罗马数字<br>Error: 无</li>
+<li>isdecimal()<br>True: Unicode数字，全角数字（双字节）<br>False: 罗马数字（英文），汉字数字，罗马数字<br>Error: byte数字（单字节）</li>
+<li>isnumeric()<br>True: Unicode数字，全角数字（双字节），罗马数字（英文），汉字数字、罗马数字<br>False: 无<br>Error: byte数字（单字节）</li>
+</ul>
+<h3 id="isspace"><a href="#isspace" class="headerlink" title="isspace()"></a>isspace()</h3><p>如果字符串中只包含空白，则返回True，否则返回False。</p>
+<h3 id="join-seq"><a href="#join-seq" class="headerlink" title="join(seq)"></a>join(seq)</h3><p>以指定字符串作为分隔符，传入的参数，迭代器seq中的所有变量的字符串表示合并为一个字符串返回。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seq = <span class="string">'-'</span> </span><br><span class="line">print(seq.join( (<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>) )) <span class="comment">#返回A-B-C</span></span><br></pre></td></tr></table></figure>
+<h3 id="len-string"><a href="#len-string" class="headerlink" title="len(string)"></a>len(string)</h3><p>返回字符串长度。</p>
+<h3 id="ljust-width-fillchar"><a href="#ljust-width-fillchar" class="headerlink" title="ljust(width[, fillchar])"></a>ljust(width[, fillchar])</h3><p>返回一个原字符串左对齐，并使用fillchar填充至长度width的新字符串，fillchar默认为空格。</p>
+<h3 id="lower"><a href="#lower" class="headerlink" title="lower()"></a>lower()</h3><p>转换字符串中所有大写字符为小写。</p>
+<h3 id="replace-old-new-max"><a href="#replace-old-new-max" class="headerlink" title="replace(old, new [, max])"></a>replace(old, new [, max])</h3><p>把将目标字符串中的old子串替换成new子串,如果max指定，则替换不超过max次。</p>
+<h3 id="split-str-”-“-num-string-count-str"><a href="#split-str-”-“-num-string-count-str" class="headerlink" title="split(str=” “, num=string.count(str))"></a>split(str=” “, num=string.count(str))</h3><p>num=string.count(str)) 以str为分隔符截取字符串，如果num有指定值，则仅截取num个子字符串。<br>这个的默认.split()意即按空格截取字符串。</p>
+<h3 id="splitlines-keepends-False"><a href="#splitlines-keepends-False" class="headerlink" title="splitlines(keepends=False)"></a>splitlines(keepends=False)</h3><p>返回字符串的行数，按照换行符切割目标字符串。<br>如果没设定keepends=True，则会将换行符从返回的字符串组中移除。</p>
+<hr>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><ol>
+<li><a href="http://www.runoob.com/python3/python3-string.html" target="_blank" rel="noopener">http://www.runoob.com/python3/python3-string.html</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431664106267f12e9bef7ee14cf6a8776a479bdec9b9000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431664106267f12e9bef7ee14cf6a8776a479bdec9b9000</a></li>
+<li><a href="https://www.cnblogs.com/jebeljebel/p/4006433.html" target="_blank" rel="noopener">https://www.cnblogs.com/jebeljebel/p/4006433.html</a></li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_button_tumblr"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/06/11/python/grammar-5/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    Python3 学习之路(5) 列表、元组与字典
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/06/10/reproduce/literature/TengWangGeXu-HaiShangGangQinShi-2/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">美文系列：滕王阁序(2)</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/11/reproduce/literature/TengWangGeXu-HaiShangGangQinShi-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/reproduce/literature/TengWangGeXu-thumbnail.png)" alt="美文系列：滕王阁序(1)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/文学/">文学</a></p>
+                            <p class="item-title"><a href="/2018/07/11/reproduce/literature/TengWangGeXu-HaiShangGangQinShi-1/" class="title">美文系列：滕王阁序(1)</a></p>
+                            <p class="item-date"><time datetime="2018-07-10T17:31:12.335Z" itemprop="datePublished">2018-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/11/hello-world/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/wall.jpg)" alt="Hello World" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/其他/">其他</a></p>
+                            <p class="item-title"><a href="/2018/07/11/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2018-07-10T17:31:12.332Z" itemprop="datePublished">2018-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/04/algorithm/Project-Euler/021-025/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/algorithm/Project-Euler/project-euler-thumbnail.png)" alt="欧拉计划个人题解(021-025)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/algorithm/">algorithm</a></p>
+                            <p class="item-title"><a href="/2018/07/04/algorithm/Project-Euler/021-025/" class="title">欧拉计划个人题解(021-025)</a></p>
+                            <p class="item-date"><time datetime="2018-07-03T20:43:18.000Z" itemprop="datePublished">2018-07-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/03/algorithm/Project-Euler/016-020/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/algorithm/Project-Euler/project-euler-thumbnail.png)" alt="欧拉计划个人题解(016-020)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/algorithm/">algorithm</a></p>
+                            <p class="item-title"><a href="/2018/07/03/algorithm/Project-Euler/016-020/" class="title">欧拉计划个人题解(016-020)</a></p>
+                            <p class="item-date"><time datetime="2018-07-03T06:45:18.000Z" itemprop="datePublished">2018-07-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/06/11/algorithm/Project-Euler/006-010/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/algorithm/Project-Euler/project-euler-thumbnail.png)" alt="欧拉计划个人题解(006-010)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/algorithm/">algorithm</a></p>
+                            <p class="item-title"><a href="/2018/06/11/algorithm/Project-Euler/006-010/" class="title">欧拉计划个人题解(006-010)</a></p>
+                            <p class="item-date"><time datetime="2018-06-11T13:35:33.000Z" itemprop="datePublished">2018-06-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文学/">文学</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">10</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hello-World/">Hello World</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Project-Euler/">Project Euler</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文学/">文学</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滕王阁序/">滕王阁序</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Hello-World/" style="font-size: 10px;">Hello World</a> <a href="/tags/Project-Euler/" style="font-size: 20px;">Project Euler</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/文学/" style="font-size: 15px;">文学</a> <a href="/tags/滕王阁序/" style="font-size: 15px;">滕王阁序</a> <a href="/tags/转载/" style="font-size: 15px;">转载</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 KylinEyes<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

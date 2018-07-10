@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Python3 学习之路(5) 列表、元组与字典 | KylinEyes&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="列表可以理解为列表为可变的数组，不过Python中的列表较之灵活许多。 访问改动使用下标索引来访问并改动列表中的值，同样你也可以使用方括号的形式截取字符，访问并改动，超出范围则会报错。 index(obj)返回目标列表中obj出现的位置，如果没有则抛出异常。 增减append(obj)向目标列表的最后添加一个元素。 extend(seq)向目标列表的最后添加如干个元素，seq要是一个可迭代的参数。">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3 学习之路(5) 列表、元组与字典">
+<meta property="og:url" content="http://yoursite.com/2018/06/11/python/grammar-5/index.html">
+<meta property="og:site_name" content="KylinEyes&#39;s Blog">
+<meta property="og:description" content="列表可以理解为列表为可变的数组，不过Python中的列表较之灵活许多。 访问改动使用下标索引来访问并改动列表中的值，同样你也可以使用方括号的形式截取字符，访问并改动，超出范围则会报错。 index(obj)返回目标列表中obj出现的位置，如果没有则抛出异常。 增减append(obj)向目标列表的最后添加一个元素。 extend(seq)向目标列表的最后添加如干个元素，seq要是一个可迭代的参数。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/python/Python-thumbnail.png">
+<meta property="og:updated_time" content="2018-07-10T17:31:12.334Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3 学习之路(5) 列表、元组与字典">
+<meta name="twitter:description" content="列表可以理解为列表为可变的数组，不过Python中的列表较之灵活许多。 访问改动使用下标索引来访问并改动列表中的值，同样你也可以使用方括号的形式截取字符，访问并改动，超出范围则会报错。 index(obj)返回目标列表中obj出现的位置，如果没有则抛出异常。 增减append(obj)向目标列表的最后添加一个元素。 extend(seq)向目标列表的最后添加如干个元素，seq要是一个可迭代的参数。">
+<meta name="twitter:image" content="http://yoursite.com/images/python/Python-thumbnail.png">
+    
+
+    
+        <link rel="alternate" href="/" title="KylinEyes&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">KylinEyes&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/images/Personal/Blog.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/images/Personal/Blog.png" />
+            <h2 id="name">Kylineyes</h2>
+            <h3 id="title">Student</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>ShenZhen, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Kylineyes">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                14
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                7
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <!--div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div-->
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-python/grammar-5" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="/images/python/Python-banner.png" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Python3 学习之路(5) 列表、元组与字典
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/06/11/python/grammar-5/">
+            <time datetime="2018-06-10T16:02:38.000Z" itemprop="datePublished">2018-06-11</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Python/">Python</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Python/">Python</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#列表"><span class="toc-number">1.</span> <span class="toc-text">列表</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#访问改动"><span class="toc-number">1.1.</span> <span class="toc-text">访问改动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#index-obj"><span class="toc-number">1.1.1.</span> <span class="toc-text">index(obj)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#增减"><span class="toc-number">1.2.</span> <span class="toc-text">增减</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#append-obj"><span class="toc-number">1.2.1.</span> <span class="toc-text">append(obj)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extend-seq"><span class="toc-number">1.2.2.</span> <span class="toc-text">extend(seq)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#insert-index-obj"><span class="toc-number">1.2.3.</span> <span class="toc-text">insert(index,obj)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#del"><span class="toc-number">1.2.4.</span> <span class="toc-text">del</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#remove-obj"><span class="toc-number">1.2.5.</span> <span class="toc-text">remove(obj)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pop-index-1"><span class="toc-number">1.2.6.</span> <span class="toc-text">pop([index=-1])</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作符"><span class="toc-number">1.3.</span> <span class="toc-text">操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他函数"><span class="toc-number">1.4.</span> <span class="toc-text">其他函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#len-list"><span class="toc-number">1.4.1.</span> <span class="toc-text">len(list)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clear"><span class="toc-number">1.4.2.</span> <span class="toc-text">clear()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#max-list-min-list"><span class="toc-number">1.4.3.</span> <span class="toc-text">max(list) min(list)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sort-cmp-None-key-None-reverse-False"><span class="toc-number">1.4.4.</span> <span class="toc-text">sort(cmp=None, key=None, reverse=False)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#元组"><span class="toc-number">2.</span> <span class="toc-text">元组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#访问"><span class="toc-number">2.1.</span> <span class="toc-text">访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#改动"><span class="toc-number">2.2.</span> <span class="toc-text">改动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除"><span class="toc-number">2.3.</span> <span class="toc-text">删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#操作符-1"><span class="toc-number">2.4.</span> <span class="toc-text">操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他函数-1"><span class="toc-number">2.5.</span> <span class="toc-text">其他函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#字典"><span class="toc-number">3.</span> <span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#访问-1"><span class="toc-number">3.1.</span> <span class="toc-text">访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#改动-1"><span class="toc-number">3.2.</span> <span class="toc-text">改动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#删除-1"><span class="toc-number">3.3.</span> <span class="toc-text">删除</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#del-dict"><span class="toc-number">3.3.1.</span> <span class="toc-text">del dict[]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clear-1"><span class="toc-number">3.3.2.</span> <span class="toc-text">clear()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#del-dict-1"><span class="toc-number">3.3.3.</span> <span class="toc-text">del dict</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他函数-2"><span class="toc-number">3.4.</span> <span class="toc-text">其他函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#len-dict"><span class="toc-number">3.4.1.</span> <span class="toc-text">len(dict)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#str-dict"><span class="toc-number">3.4.2.</span> <span class="toc-text">str(dict)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fromkeys"><span class="toc-number">3.4.3.</span> <span class="toc-text">fromkeys()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#get-key-default-None"><span class="toc-number">3.4.4.</span> <span class="toc-text">get(key, default=None)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#items"><span class="toc-number">3.4.5.</span> <span class="toc-text">items()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setdefault-key-default-None"><span class="toc-number">3.4.6.</span> <span class="toc-text">setdefault(key, default=None)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pop-key-default"><span class="toc-number">3.4.7.</span> <span class="toc-text">pop(key[,default])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#keys-values"><span class="toc-number">3.4.8.</span> <span class="toc-text">keys()/values()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#引用"><span class="toc-number">4.</span> <span class="toc-text">引用</span></a></li></ol>
+                </div>
+            
+            <h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><p>可以理解为列表为可变的数组，不过Python中的列表较之灵活许多。</p>
+<h2 id="访问改动"><a href="#访问改动" class="headerlink" title="访问改动"></a>访问改动</h2><p>使用下标索引来访问并改动列表中的值，同样你也可以使用方括号的形式截取字符，访问并改动，超出范围则会报错。</p>
+<h3 id="index-obj"><a href="#index-obj" class="headerlink" title="index(obj)"></a>index(obj)</h3><p>返回目标列表中obj出现的位置，如果没有则抛出异常。</p>
+<h2 id="增减"><a href="#增减" class="headerlink" title="增减"></a>增减</h2><h3 id="append-obj"><a href="#append-obj" class="headerlink" title="append(obj)"></a>append(obj)</h3><p>向目标列表的最后添加一个元素。</p>
+<h3 id="extend-seq"><a href="#extend-seq" class="headerlink" title="extend(seq)"></a>extend(seq)</h3><p>向目标列表的最后添加如干个元素，seq要是一个可迭代的参数。</p>
+<h3 id="insert-index-obj"><a href="#insert-index-obj" class="headerlink" title="insert(index,obj)"></a>insert(index,obj)</h3><p>向目标列表指定位置插入一个元素。</p>
+<h3 id="del"><a href="#del" class="headerlink" title="del"></a>del</h3><p>可以使用 del 语句来删除列表的的元素，可以删除整个列表，也可以通过下标索引来删除列表中的某个或某些元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>,<span class="string">'D'</span>,<span class="string">'E'</span>,<span class="string">'F'</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> list[<span class="number">0</span>] <span class="comment"># 删除一个元素 </span></span><br><span class="line">print(list) <span class="comment"># 输出['B', 'C', 'D', 'E', 'F'] </span></span><br><span class="line"><span class="keyword">del</span> list[<span class="number">1</span>:<span class="number">3</span>] <span class="comment"># 删除一些元素 </span></span><br><span class="line">print(list) <span class="comment"># 输出['B', 'E', 'F'] </span></span><br><span class="line"><span class="keyword">del</span> list <span class="comment"># 删除整个列表</span></span><br></pre></td></tr></table></figure>
+<h3 id="remove-obj"><a href="#remove-obj" class="headerlink" title="remove(obj)"></a>remove(obj)</h3><p>移除目标列表的指定元素，找不到则抛出异常。</p>
+<h3 id="pop-index-1"><a href="#pop-index-1" class="headerlink" title="pop([index=-1])"></a>pop([index=-1])</h3><p>移除列表中的一个元素（默认最后一个元素），并且返回该元素的值，没有值可以返回则抛出异常。</p>
+<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><p>列表的操作与字符串运算符的种类和效果基本相同，此处不表，请参照之前的文章。</p>
+<h2 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h2><h3 id="len-list"><a href="#len-list" class="headerlink" title="len(list)"></a>len(list)</h3><p>返回列表元素个数。</p>
+<h3 id="clear"><a href="#clear" class="headerlink" title="clear()"></a>clear()</h3><p>清除目标列表的所有元素。</p>
+<h3 id="max-list-min-list"><a href="#max-list-min-list" class="headerlink" title="max(list) min(list)"></a>max(list) min(list)</h3><p>返回列表元素的最大/小值，如果列表中的元素不是一种类型或者没有重载小于号，会报错。<br>当列表中元素均是一种类型，可以通过此类型的默认排序获得结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list = [[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">4</span>,<span class="number">4</span>],[<span class="number">4</span>,<span class="number">2</span>,<span class="number">2</span>]]</span><br><span class="line">print(max(list)) <span class="comment"># 输出[4,4] 即先比较第一个数，再比较第二个数</span></span><br></pre></td></tr></table></figure>
+<h3 id="sort-cmp-None-key-None-reverse-False"><a href="#sort-cmp-None-key-None-reverse-False" class="headerlink" title="sort(cmp=None, key=None, reverse=False)"></a>sort(cmp=None, key=None, reverse=False)</h3><p>对原列表进行排序，不返回值。</p>
+<ul>
+<li>cmp 可选参数, 如果指定了该参数会使用该参数的方法进行排序。</li>
+<li>key 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
+<li>reverse 排序规则，reverse = True 降序， reverse = False 升序（默认）。</li>
+</ul>
+<p>sort还可以搭配类中重载小于号的方式来使用，此处按下不表。</p>
+<h1 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h1><p>可以理解为元组为不可变的数组，目的是为了代码的安全性。</p>
+<h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><p>使用下标索引来访问元组中的值。</p>
+<h2 id="改动"><a href="#改动" class="headerlink" title="改动"></a>改动</h2><p>元组中的元素值是不允许修改的，但我们可以对元组进行连接组合。</p>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>元组中的元素值是不允许删除的，但我们可以使用del语句来删除整个元组。</p>
+<h2 id="操作符-1"><a href="#操作符-1" class="headerlink" title="操作符"></a>操作符</h2><p>元组的操作与字符串运算符的种类和效果基本相同，此处不表，请参照之前的文章。</p>
+<h2 id="其他函数-1"><a href="#其他函数-1" class="headerlink" title="其他函数"></a>其他函数</h2><p>元组同列表一样拥有len()、min()、max()等函数。</p>
+<h1 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h1><p>字典同其他主流编程语言的map一样，是一种key->value的容器，查询速度很快。<br>要注意的是，key要是唯一的且不可变，但value不一定。如果重复对一个key进行改动，则会把旧的抛弃，更新为新的。</p>
+<h2 id="访问-1"><a href="#访问-1" class="headerlink" title="访问"></a>访问</h2><p>使用下标索引(key)来访问字典中的值。没有会报错。</p>
+<h2 id="改动-1"><a href="#改动-1" class="headerlink" title="改动"></a>改动</h2><p>使用下标索引(key)来更新元组中的值。</p>
+<h2 id="删除-1"><a href="#删除-1" class="headerlink" title="删除"></a>删除</h2><p>有三种方法可以不同程度上的删除字典。</p>
+<h3 id="del-dict"><a href="#del-dict" class="headerlink" title="del dict[]"></a>del dict[]</h3><p>删除字典里的一对key->value的元素。</p>
+<h3 id="clear-1"><a href="#clear-1" class="headerlink" title="clear()"></a>clear()</h3><p>删除字典里面的所有元素。</p>
+<h3 id="del-dict-1"><a href="#del-dict-1" class="headerlink" title="del dict"></a>del dict</h3><p>删除整个字典。dsadsadsadsa</p>
+<h2 id="其他函数-2"><a href="#其他函数-2" class="headerlink" title="其他函数"></a>其他函数</h2><h3 id="len-dict"><a href="#len-dict" class="headerlink" title="len(dict)"></a>len(dict)</h3><p>计算字典元素个数，即键的总数。</p>
+<h3 id="str-dict"><a href="#str-dict" class="headerlink" title="str(dict)"></a>str(dict)</h3><p>输出字典，以可打印的字符串表示。</p>
+<h3 id="fromkeys"><a href="#fromkeys" class="headerlink" title="fromkeys()"></a>fromkeys()</h3><p>创建一个新字典，以序列seq中元素做字典的键，val为字典所有键对应的初始值。</p>
+<h3 id="get-key-default-None"><a href="#get-key-default-None" class="headerlink" title="get(key, default=None)"></a>get(key, default=None)</h3><p>返回指定键的值，如果值不在字典中返回default值。</p>
+<h3 id="items"><a href="#items" class="headerlink" title="items()"></a>items()</h3><p>以列表返回可遍历的(键, 值) 元组数组。</p>
+<h3 id="setdefault-key-default-None"><a href="#setdefault-key-default-None" class="headerlink" title="setdefault(key, default=None)"></a>setdefault(key, default=None)</h3><p>和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default。</p>
+<h3 id="pop-key-default"><a href="#pop-key-default" class="headerlink" title="pop(key[,default])"></a>pop(key[,default])</h3><p>删除字典给定键 key 所对应的值，返回值为被删除的值。key值必须给出。 否则，返回default值。</p>
+<h3 id="keys-values"><a href="#keys-values" class="headerlink" title="keys()/values()"></a>keys()/values()</h3><p>以列表返回一个字典所有的键/值。</p>
+<hr>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><ol>
+<li><a href="http://www.runoob.com/python3/python3-list.html" target="_blank" rel="noopener">http://www.runoob.com/python3/python3-list.html</a></li>
+<li><a href="http://www.runoob.com/python3/python3-tuple.html" target="_blank" rel="noopener">http://www.runoob.com/python3/python3-tuple.html</a></li>
+<li><a href="http://www.runoob.com/python3/python3-dictionary.html" target="_blank" rel="noopener">http://www.runoob.com/python3/python3-dictionary.html</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316724772904521142196b74a3f8abf93d8e97c6ee6000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316724772904521142196b74a3f8abf93d8e97c6ee6000</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143167793538255adf33371774853a0ef943280573f4d000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143167793538255adf33371774853a0ef943280573f4d000</a></li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_button_tumblr"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/06/11/algorithm/Project-Euler/001-005/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    欧拉计划个人题解(001-005)
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/06/10/python/grammar-4/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Python3 学习之路(4) 字符串</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/11/reproduce/literature/TengWangGeXu-HaiShangGangQinShi-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/reproduce/literature/TengWangGeXu-thumbnail.png)" alt="美文系列：滕王阁序(1)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/文学/">文学</a></p>
+                            <p class="item-title"><a href="/2018/07/11/reproduce/literature/TengWangGeXu-HaiShangGangQinShi-1/" class="title">美文系列：滕王阁序(1)</a></p>
+                            <p class="item-date"><time datetime="2018-07-10T17:31:12.335Z" itemprop="datePublished">2018-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/11/hello-world/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/wall.jpg)" alt="Hello World" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/其他/">其他</a></p>
+                            <p class="item-title"><a href="/2018/07/11/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2018-07-10T17:31:12.332Z" itemprop="datePublished">2018-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/04/algorithm/Project-Euler/021-025/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/algorithm/Project-Euler/project-euler-thumbnail.png)" alt="欧拉计划个人题解(021-025)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/algorithm/">algorithm</a></p>
+                            <p class="item-title"><a href="/2018/07/04/algorithm/Project-Euler/021-025/" class="title">欧拉计划个人题解(021-025)</a></p>
+                            <p class="item-date"><time datetime="2018-07-03T20:43:18.000Z" itemprop="datePublished">2018-07-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/03/algorithm/Project-Euler/016-020/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/algorithm/Project-Euler/project-euler-thumbnail.png)" alt="欧拉计划个人题解(016-020)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/algorithm/">algorithm</a></p>
+                            <p class="item-title"><a href="/2018/07/03/algorithm/Project-Euler/016-020/" class="title">欧拉计划个人题解(016-020)</a></p>
+                            <p class="item-date"><time datetime="2018-07-03T06:45:18.000Z" itemprop="datePublished">2018-07-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/06/11/algorithm/Project-Euler/006-010/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/algorithm/Project-Euler/project-euler-thumbnail.png)" alt="欧拉计划个人题解(006-010)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/algorithm/">algorithm</a></p>
+                            <p class="item-title"><a href="/2018/06/11/algorithm/Project-Euler/006-010/" class="title">欧拉计划个人题解(006-010)</a></p>
+                            <p class="item-date"><time datetime="2018-06-11T13:35:33.000Z" itemprop="datePublished">2018-06-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文学/">文学</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">10</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hello-World/">Hello World</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Project-Euler/">Project Euler</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文学/">文学</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滕王阁序/">滕王阁序</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Hello-World/" style="font-size: 10px;">Hello World</a> <a href="/tags/Project-Euler/" style="font-size: 20px;">Project Euler</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/文学/" style="font-size: 15px;">文学</a> <a href="/tags/滕王阁序/" style="font-size: 15px;">滕王阁序</a> <a href="/tags/转载/" style="font-size: 15px;">转载</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 KylinEyes<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

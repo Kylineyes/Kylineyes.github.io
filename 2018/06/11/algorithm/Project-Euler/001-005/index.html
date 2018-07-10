@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>欧拉计划个人题解(001-005) | KylinEyes&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="[001]Multiples of 3 and 5题意 找寻[1,1000)以内，是3的倍数，或是5的倍数的数。 思路 暴力搜索判定 优化 容斥，先计算3的倍数在1000内有多少个，然后用等差公式计算出1000内3的倍数的和，同理有5的倍数，两者相加，重复的数用15的倍数的和减去即可。 代码 C++\STL123456789101112long long SumOf(long long up, i">
+<meta name="keywords" content="Project Euler,algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="欧拉计划个人题解(001-005)">
+<meta property="og:url" content="http://yoursite.com/2018/06/11/algorithm/Project-Euler/001-005/index.html">
+<meta property="og:site_name" content="KylinEyes&#39;s Blog">
+<meta property="og:description" content="[001]Multiples of 3 and 5题意 找寻[1,1000)以内，是3的倍数，或是5的倍数的数。 思路 暴力搜索判定 优化 容斥，先计算3的倍数在1000内有多少个，然后用等差公式计算出1000内3的倍数的和，同理有5的倍数，两者相加，重复的数用15的倍数的和减去即可。 代码 C++\STL123456789101112long long SumOf(long long up, i">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/algorithm/Project-Euler/project-euler-thumbnail.png">
+<meta property="og:updated_time" content="2018-07-10T17:31:12.330Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="欧拉计划个人题解(001-005)">
+<meta name="twitter:description" content="[001]Multiples of 3 and 5题意 找寻[1,1000)以内，是3的倍数，或是5的倍数的数。 思路 暴力搜索判定 优化 容斥，先计算3的倍数在1000内有多少个，然后用等差公式计算出1000内3的倍数的和，同理有5的倍数，两者相加，重复的数用15的倍数的和减去即可。 代码 C++\STL123456789101112long long SumOf(long long up, i">
+<meta name="twitter:image" content="http://yoursite.com/images/algorithm/Project-Euler/project-euler-thumbnail.png">
+    
+
+    
+        <link rel="alternate" href="/" title="KylinEyes&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">KylinEyes&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/images/Personal/Blog.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/images/Personal/Blog.png" />
+            <h2 id="name">Kylineyes</h2>
+            <h3 id="title">Student</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>ShenZhen, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Kylineyes">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                14
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                7
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <!--div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div-->
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-algorithm/Project-Euler/001-005" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="/images/algorithm/Project-Euler/project-euler-banner.png" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            欧拉计划个人题解(001-005)
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/06/11/algorithm/Project-Euler/001-005/">
+            <time datetime="2018-06-10T16:56:06.000Z" itemprop="datePublished">2018-06-11</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Project-Euler/">Project Euler</a>, <a class="tag-link" href="/tags/algorithm/">algorithm</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#001-Multiples-of-3-and-5"><span class="toc-number">1.</span> <span class="toc-text">[001]Multiples of 3 and 5</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#002-Even-Fibonacci-numbers"><span class="toc-number">2.</span> <span class="toc-text">[002]Even Fibonacci numbers</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#003-Largest-prime-factor"><span class="toc-number">3.</span> <span class="toc-text">[003]Largest prime factor</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#004-Largest-palindrome-product"><span class="toc-number">4.</span> <span class="toc-text">[004]Largest palindrome product</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#005-Smallest-multiple"><span class="toc-number">5.</span> <span class="toc-text">[005]Smallest multiple</span></a></li></ol>
+                </div>
+            
+            <h1 id="001-Multiples-of-3-and-5"><a href="#001-Multiples-of-3-and-5" class="headerlink" title="[001]Multiples of 3 and 5"></a>[001]Multiples of 3 and 5</h1><p><strong>题意</strong></p>
+<p>找寻[1,1000)以内，是3的倍数，或是5的倍数的数。</p>
+<p><strong>思路</strong></p>
+<p>暴力搜索判定</p>
+<p><strong>优化</strong></p>
+<p>容斥，先计算3的倍数在1000内有多少个，然后用等差公式计算出1000内3的倍数的和，同理有5的倍数，两者相加，重复的数用15的倍数的和减去即可。</p>
+<p><strong>代码</strong></p>
+<p>C++\STL<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">SumOf</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> up, <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> cnt = (up - <span class="number">1</span>) / k;</span><br><span class="line">    <span class="keyword">return</span> (k + cnt * k) * cnt / <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; SumOf(n, <span class="number">5</span>) + SumOf(n, <span class="number">7</span>) - SumOf(n, <span class="number">35</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>答案</strong></p>
+<p>233168</p>
+<h1 id="002-Even-Fibonacci-numbers"><a href="#002-Even-Fibonacci-numbers" class="headerlink" title="[002]Even Fibonacci numbers"></a>[002]Even Fibonacci numbers</h1><p><strong>题意</strong></p>
+<p>斐波那契数列:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">F[1] = 1</span><br><span class="line">F[2] = 1</span><br><span class="line">F[3] = 2</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>求斐波那契数列中数字为偶数的所有数字之和，数字不大于400万。</p>
+<p><strong>思路</strong></p>
+<p>递推暴力</p>
+<p>C++\STL</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">1</span>, c = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(c &lt;= <span class="number">4000000</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += c;</span><br><span class="line">        a = b + c;</span><br><span class="line">        b = a + c;</span><br><span class="line">        c = a + b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>优化</strong></p>
+<p>列表找规律：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">F[1] =  1     F[2] = 1</span><br><span class="line">F[3] =  2     F[4] = 3</span><br><span class="line">F[5] =  5     F[6] = 8</span><br><span class="line">F[7] =  13    F[8] = 21</span><br><span class="line">F[9] =  34    F[10] = 55</span><br><span class="line">F[11] = 89    F[12] = 144</span><br><span class="line">F[13] = 233   F[14] = 377</span><br><span class="line">F[15] = 610   F[16] = 987</span><br><span class="line">F[17] = 1597  F[18] = 2584</span><br></pre></td></tr></table></figure>
+<p>符合题意的有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">F[3] = 2</span><br><span class="line">F[6] = 8</span><br><span class="line">F[9] = 34</span><br><span class="line">F[12] = 144</span><br><span class="line">F[11] = 610</span><br><span class="line">F[18] = 2584</span><br></pre></td></tr></table></figure>
+<p>观察可得 <code>F[n] = 4 * F[n-3] + F[n - 6]</code></p>
+<p>正确性可以由斐波那契数列定义推出：</p>
+<p>$$<br>\begin{align}<br>F_n &amp;= F_{n-1} + F_{n-2} \\<br>&amp; = F_{n-2} + F_{n-3} + F_{n-2} = 2 \times F_{n-2} + F_{n-3} \\<br>&amp; = 2 \times ( F_{n-3} + F_{n-4} ) + F_{n-3} ) = 3 \times F_{n-3} + 2 \times F_{n-4} \\<br>&amp; = 3 \times F_{n-3} + F_{n-4} + F_{n-5} + F_{n-6} \\<br>&amp; = 4 \times F_{n-3} + F_{n-6} \\<br>\end{align}<br>$$<br><strong>代码</strong></p>
+<p>C++\STL</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">3</span>] = &#123;<span class="number">2</span>,<span class="number">8</span>,<span class="number">34</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> p = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span>(a[p] &lt; <span class="number">4000000</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += a[p];</span><br><span class="line">        p = (p + <span class="number">1</span>) % <span class="number">3</span>;</span><br><span class="line">        a[p] = <span class="number">4</span> * a[(p + <span class="number">2</span>) % <span class="number">3</span>] + a[(p + <span class="number">1</span>) % <span class="number">3</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>答案</strong></p>
+<p>4613732</p>
+<h1 id="003-Largest-prime-factor"><a href="#003-Largest-prime-factor" class="headerlink" title="[003]Largest prime factor"></a>[003]Largest prime factor</h1><p><strong>题意</strong></p>
+<p>求 600851475143 最大的质因子</p>
+<p><strong>思路</strong></p>
+<p>刚开始先暴力的，发现循环判定再循环判定复杂度就太高了。于是用埃氏筛法扫过去就行了。</p>
+<p><strong>代码</strong></p>
+<p>C++\STL</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Eratosthenes</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">long</span> TARGET = <span class="number">600851475143L</span>L;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> upper = <span class="keyword">static_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">int</span>&gt;(<span class="built_in">sqrt</span>(TARGET));</span><br><span class="line">    <span class="keyword">bool</span> *num = <span class="keyword">new</span> <span class="keyword">bool</span>[<span class="keyword">static_cast</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>&gt;(upper)];</span><br><span class="line">    <span class="built_in">memset</span>(num, <span class="literal">false</span>, <span class="keyword">sizeof</span>(<span class="keyword">bool</span>) * <span class="keyword">static_cast</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>&gt;(upper));</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = ans; i &lt; upper; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(num[i] == <span class="literal">false</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> p = <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">while</span>(i * p &lt; upper)</span><br><span class="line">            &#123;</span><br><span class="line">                num[ i * p ] = <span class="literal">true</span>;</span><br><span class="line">                ++p;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(TARGET % i == <span class="number">0</span>)</span><br><span class="line">                ans = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span>[] num;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = Eratosthenes();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>答案</strong></p>
+<p>6857</p>
+<h1 id="004-Largest-palindrome-product"><a href="#004-Largest-palindrome-product" class="headerlink" title="[004]Largest palindrome product"></a>[004]Largest palindrome product</h1><p><strong>题意</strong></p>
+<p>对于一个回文数，如：9009 = 91 × 99，他是由两个两位数构成的。现在找两个三位数能构成的最大回文数。</p>
+<p><strong>思路</strong></p>
+<p>首先是构造回文数，它符合一下几个规律：</p>
+<ol>
+<li>六位数</li>
+<li>六位数里面最大的</li>
+<li>前三位和后三位对应相同</li>
+</ol>
+<p>由上，我们将回文数按位拆分，枚举前一二三位，做对应就行了。值得一提的是第一位不可能为0，二三位都有可能为0。</p>
+<p><strong>优化</strong></p>
+<p>回文数必然可以被11整除，证明如下： 回文数的形式必然为：</p>
+<blockquote>
+<p>100000a + 10000b + 1000c + 100c + 10b + a<br>=100001a + 10010b + 1100c<br>因为：<br>100001 % 11 = 0<br>10010 % 11 = 0<br>1100 % 11 = 0<br>所以：<br>回文数必然可以被11整除</p>
+</blockquote>
+<p><strong>代码</strong></p>
+<p>C++\STL</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line">    <span class="keyword">int</span> mark = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">9</span>; i &gt;= <span class="number">1</span> &amp;&amp; mark; --i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">9</span>; j &gt;= <span class="number">0</span> &amp;&amp; mark; --j)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">9</span>; k &gt;= <span class="number">0</span> &amp;&amp; mark; --k)</span><br><span class="line">            &#123;</span><br><span class="line">                num = i*<span class="number">100</span> + j * <span class="number">10</span> + k;</span><br><span class="line">                num = num * <span class="number">1000</span> + k * <span class="number">100</span> + j * <span class="number">10</span> + i;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">999</span>; t &gt;= <span class="number">100</span> &amp;&amp; mark; --t)</span><br><span class="line">                    <span class="keyword">if</span>(num % t == <span class="number">0</span> &amp;&amp; num / t &gt;= <span class="number">100</span> &amp;&amp; num / t &lt; <span class="number">1000</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="built_in">cout</span> &lt;&lt; num &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                        mark = <span class="number">0</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>答案</strong></p>
+<p>906609</p>
+<h1 id="005-Smallest-multiple"><a href="#005-Smallest-multiple" class="headerlink" title="[005]Smallest multiple"></a>[005]Smallest multiple</h1><p><strong>题意</strong></p>
+<p>2520是最小的能被1-10中每个数字整除的正整数。 最小的能被1-20中每个数整除的正整数是多少？</p>
+<p><strong>思路</strong></p>
+<p>刚开始想直接找到20以内的质数2,3,5,7…相乘得出答案的，后来交了发现不对，尝试了一次，发现在4的时候就不能整除了。后来百度搜了一下，要：</p>
+<ol>
+<li>列出20以内的质数，并求这些质数的小于20的最高次幂</li>
+<li>再将这些质数的最高次幂的积相乘</li>
+</ol>
+<p>于是有了下面的代码。</p>
+<p><strong>代码</strong></p>
+<p>C++\STL</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; s, <span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> e : s)</span><br><span class="line">        <span class="keyword">if</span>(num % e == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">20</span>; ++i)</span><br><span class="line">        <span class="keyword">if</span>(check(s,i))</span><br><span class="line">            s.push_back(i);</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">1L</span>L;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> e : s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(m * e &lt;= <span class="number">20</span>)</span><br><span class="line">            m *= e;</span><br><span class="line">        ans *= m;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>答案</strong></p>
+<p>232792560</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_button_tumblr"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/06/11/algorithm/Project-Euler/011-015/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    欧拉计划个人题解(011-015)
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/06/11/python/grammar-5/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Python3 学习之路(5) 列表、元组与字典</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/11/reproduce/literature/TengWangGeXu-HaiShangGangQinShi-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/reproduce/literature/TengWangGeXu-thumbnail.png)" alt="美文系列：滕王阁序(1)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/文学/">文学</a></p>
+                            <p class="item-title"><a href="/2018/07/11/reproduce/literature/TengWangGeXu-HaiShangGangQinShi-1/" class="title">美文系列：滕王阁序(1)</a></p>
+                            <p class="item-date"><time datetime="2018-07-10T17:31:12.335Z" itemprop="datePublished">2018-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/11/hello-world/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/wall.jpg)" alt="Hello World" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/其他/">其他</a></p>
+                            <p class="item-title"><a href="/2018/07/11/hello-world/" class="title">Hello World</a></p>
+                            <p class="item-date"><time datetime="2018-07-10T17:31:12.332Z" itemprop="datePublished">2018-07-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/04/algorithm/Project-Euler/021-025/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/algorithm/Project-Euler/project-euler-thumbnail.png)" alt="欧拉计划个人题解(021-025)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/algorithm/">algorithm</a></p>
+                            <p class="item-title"><a href="/2018/07/04/algorithm/Project-Euler/021-025/" class="title">欧拉计划个人题解(021-025)</a></p>
+                            <p class="item-date"><time datetime="2018-07-03T20:43:18.000Z" itemprop="datePublished">2018-07-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/03/algorithm/Project-Euler/016-020/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/algorithm/Project-Euler/project-euler-thumbnail.png)" alt="欧拉计划个人题解(016-020)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/algorithm/">algorithm</a></p>
+                            <p class="item-title"><a href="/2018/07/03/algorithm/Project-Euler/016-020/" class="title">欧拉计划个人题解(016-020)</a></p>
+                            <p class="item-date"><time datetime="2018-07-03T06:45:18.000Z" itemprop="datePublished">2018-07-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/06/11/algorithm/Project-Euler/006-010/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/algorithm/Project-Euler/project-euler-thumbnail.png)" alt="欧拉计划个人题解(006-010)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/algorithm/">algorithm</a></p>
+                            <p class="item-title"><a href="/2018/06/11/algorithm/Project-Euler/006-010/" class="title">欧拉计划个人题解(006-010)</a></p>
+                            <p class="item-date"><time datetime="2018-06-11T13:35:33.000Z" itemprop="datePublished">2018-06-11</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文学/">文学</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">10</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hello-World/">Hello World</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Project-Euler/">Project Euler</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文学/">文学</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滕王阁序/">滕王阁序</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Hello-World/" style="font-size: 10px;">Hello World</a> <a href="/tags/Project-Euler/" style="font-size: 20px;">Project Euler</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/文学/" style="font-size: 15px;">文学</a> <a href="/tags/滕王阁序/" style="font-size: 15px;">滕王阁序</a> <a href="/tags/转载/" style="font-size: 15px;">转载</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 KylinEyes<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
