@@ -157,11 +157,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                14
+                18
                 <span>文章</span>
             </div>
             <div class="article-info-block">
-                7
+                9
                 <span>标签</span>
             </div>
         </div>
@@ -210,6 +210,948 @@
 
             
             <section id="main">
+    <article id="post-algorithm/Project-Euler/001-005" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2018/06/11/algorithm/Project-Euler/001-005/" itemprop="url">
+            <img src="/images/algorithm/Project-Euler/project-euler-banner.png" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/06/11/algorithm/Project-Euler/001-005/">欧拉计划个人题解(001-005)</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/06/11/algorithm/Project-Euler/001-005/">
+            <time datetime="2018-06-10T16:56:06.000Z" itemprop="datePublished">2018-06-11</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/algorithm/">algorithm</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Project-Euler/">Project Euler</a>, <a class="tag-link" href="/tags/algorithm/">algorithm</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="001-Multiples-of-3-and-5"><a href="#001-Multiples-of-3-and-5" class="headerlink" title="[001]Multiples of 3 and 5"></a>[001]Multiples of 3 and 5</h1><p><strong>题意</strong></p>
+<p>找寻[1,1000)以内，是3的倍数，或是5的倍数的数。</p>
+<p><strong>思路</strong></p>
+<p>暴力搜索判定</p>
+<p><strong>优化</strong></p>
+<p>容斥，先计算3的倍数在1000内有多少个，然后用等差公式计算出1000内3的倍数的和，同理有5的倍数，两者相加，重复的数用15的倍数的和减去即可。</p>
+<p><strong>代码</strong></p>
+<p>C++\STL<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">SumOf</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> up, <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> cnt = (up - <span class="number">1</span>) / k;</span><br><span class="line">    <span class="keyword">return</span> (k + cnt * k) * cnt / <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; SumOf(n, <span class="number">5</span>) + SumOf(n, <span class="number">7</span>) - SumOf(n, <span class="number">35</span>) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>答案</strong></p>
+<p>233168</p>
+<h1 id="002-Even-Fibonacci-numbers"><a href="#002-Even-Fibonacci-numbers" class="headerlink" title="[002]Even Fibonacci numbers"></a>[002]Even Fibonacci numbers</h1><p><strong>题意</strong></p>
+<p>斐波那契数列:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">F[1] = 1</span><br><span class="line">F[2] = 1</span><br><span class="line">F[3] = 2</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>求斐波那契数列中数字为偶数的所有数字之和，数字不大于400万。</p>
+<p><strong>思路</strong></p>
+<p>递推暴力</p>
+<p>C++\STL</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">1</span>, c = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(c &lt;= <span class="number">4000000</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += c;</span><br><span class="line">        a = b + c;</span><br><span class="line">        b = a + c;</span><br><span class="line">        c = a + b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>优化</strong></p>
+<p>列表找规律：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">F[1] =  1     F[2] = 1</span><br><span class="line">F[3] =  2     F[4] = 3</span><br><span class="line">F[5] =  5     F[6] = 8</span><br><span class="line">F[7] =  13    F[8] = 21</span><br><span class="line">F[9] =  34    F[10] = 55</span><br><span class="line">F[11] = 89    F[12] = 144</span><br><span class="line">F[13] = 233   F[14] = 377</span><br><span class="line">F[15] = 610   F[16] = 987</span><br><span class="line">F[17] = 1597  F[18] = 2584</span><br></pre></td></tr></table></figure>
+<p>符合题意的有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">F[3] = 2</span><br><span class="line">F[6] = 8</span><br><span class="line">F[9] = 34</span><br><span class="line">F[12] = 144</span><br><span class="line">F[11] = 610</span><br><span class="line">F[18] = 2584</span><br></pre></td></tr></table></figure>
+<p>观察可得 <code>F[n] = 4 * F[n-3] + F[n - 6]</code></p>
+<p>正确性可以由斐波那契数列定义推出：</p>
+<p>$$<br>\begin{align}<br>F_n &amp;= F_{n-1} + F_{n-2} \\<br>&amp; = F_{n-2} + F_{n-3} + F_{n-2} = 2 \times F_{n-2} + F_{n-3} \\<br>&amp; = 2 \times ( F_{n-3} + F_{n-4} ) + F_{n-3} ) = 3 \times F_{n-3} + 2 \times F_{n-4} \\<br>&amp; = 3 \times F_{n-3} + F_{n-4} + F_{n-5} + F_{n-6} \\<br>&amp; = 4 \times F_{n-3} + F_{n-6} \\<br>\end{align}<br>$$<br><strong>代码</strong></p>
+<p>C++\STL</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">3</span>] = &#123;<span class="number">2</span>,<span class="number">8</span>,<span class="number">34</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> p = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span>(a[p] &lt; <span class="number">4000000</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ans += a[p];</span><br><span class="line">        p = (p + <span class="number">1</span>) % <span class="number">3</span>;</span><br><span class="line">        a[p] = <span class="number">4</span> * a[(p + <span class="number">2</span>) % <span class="number">3</span>] + a[(p + <span class="number">1</span>) % <span class="number">3</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>答案</strong></p>
+<p>4613732</p>
+<h1 id="003-Largest-prime-factor"><a href="#003-Largest-prime-factor" class="headerlink" title="[003]Largest prime factor"></a>[003]Largest prime factor</h1><p><strong>题意</strong></p>
+<p>求 600851475143 最大的质因子</p>
+<p><strong>思路</strong></p>
+<p>刚开始先暴力的，发现循环判定再循环判定复杂度就太高了。于是用埃氏筛法扫过去就行了。</p>
+<p><strong>代码</strong></p>
+<p>C++\STL</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Eratosthenes</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">long</span> <span class="keyword">long</span> TARGET = <span class="number">600851475143L</span>L;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> upper = <span class="keyword">static_cast</span>&lt;<span class="keyword">const</span> <span class="keyword">int</span>&gt;(<span class="built_in">sqrt</span>(TARGET));</span><br><span class="line">    <span class="keyword">bool</span> *num = <span class="keyword">new</span> <span class="keyword">bool</span>[<span class="keyword">static_cast</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>&gt;(upper)];</span><br><span class="line">    <span class="built_in">memset</span>(num, <span class="literal">false</span>, <span class="keyword">sizeof</span>(<span class="keyword">bool</span>) * <span class="keyword">static_cast</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span>&gt;(upper));</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = ans; i &lt; upper; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(num[i] == <span class="literal">false</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> p = <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">while</span>(i * p &lt; upper)</span><br><span class="line">            &#123;</span><br><span class="line">                num[ i * p ] = <span class="literal">true</span>;</span><br><span class="line">                ++p;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(TARGET % i == <span class="number">0</span>)</span><br><span class="line">                ans = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span>[] num;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ans = Eratosthenes();</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>答案</strong></p>
+<p>6857</p>
+<h1 id="004-Largest-palindrome-product"><a href="#004-Largest-palindrome-product" class="headerlink" title="[004]Largest palindrome product"></a>[004]Largest palindrome product</h1><p><strong>题意</strong></p>
+<p>对于一个回文数，如：9009 = 91 × 99，他是由两个两位数构成的。现在找两个三位数能构成的最大回文数。</p>
+<p><strong>思路</strong></p>
+<p>首先是构造回文数，它符合一下几个规律：</p>
+<ol>
+<li>六位数</li>
+<li>六位数里面最大的</li>
+<li>前三位和后三位对应相同</li>
+</ol>
+<p>由上，我们将回文数按位拆分，枚举前一二三位，做对应就行了。值得一提的是第一位不可能为0，二三位都有可能为0。</p>
+<p><strong>优化</strong></p>
+<p>回文数必然可以被11整除，证明如下： 回文数的形式必然为：</p>
+<blockquote>
+<p>100000a + 10000b + 1000c + 100c + 10b + a<br>=100001a + 10010b + 1100c<br>因为：<br>100001 % 11 = 0<br>10010 % 11 = 0<br>1100 % 11 = 0<br>所以：<br>回文数必然可以被11整除</p>
+</blockquote>
+<p><strong>代码</strong></p>
+<p>C++\STL</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> num;</span><br><span class="line">    <span class="keyword">int</span> mark = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">9</span>; i &gt;= <span class="number">1</span> &amp;&amp; mark; --i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">9</span>; j &gt;= <span class="number">0</span> &amp;&amp; mark; --j)</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">9</span>; k &gt;= <span class="number">0</span> &amp;&amp; mark; --k)</span><br><span class="line">            &#123;</span><br><span class="line">                num = i*<span class="number">100</span> + j * <span class="number">10</span> + k;</span><br><span class="line">                num = num * <span class="number">1000</span> + k * <span class="number">100</span> + j * <span class="number">10</span> + i;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> t = <span class="number">999</span>; t &gt;= <span class="number">100</span> &amp;&amp; mark; --t)</span><br><span class="line">                    <span class="keyword">if</span>(num % t == <span class="number">0</span> &amp;&amp; num / t &gt;= <span class="number">100</span> &amp;&amp; num / t &lt; <span class="number">1000</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="built_in">cout</span> &lt;&lt; num &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">                        mark = <span class="number">0</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">            &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>答案</strong></p>
+<p>906609</p>
+<h1 id="005-Smallest-multiple"><a href="#005-Smallest-multiple" class="headerlink" title="[005]Smallest multiple"></a>[005]Smallest multiple</h1><p><strong>题意</strong></p>
+<p>2520是最小的能被1-10中每个数字整除的正整数。 最小的能被1-20中每个数整除的正整数是多少？</p>
+<p><strong>思路</strong></p>
+<p>刚开始想直接找到20以内的质数2,3,5,7…相乘得出答案的，后来交了发现不对，尝试了一次，发现在4的时候就不能整除了。后来百度搜了一下，要：</p>
+<ol>
+<li>列出20以内的质数，并求这些质数的小于20的最高次幂</li>
+<li>再将这些质数的最高次幂的积相乘</li>
+</ol>
+<p>于是有了下面的代码。</p>
+<p><strong>代码</strong></p>
+<p>C++\STL</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; s, <span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> e : s)</span><br><span class="line">        <span class="keyword">if</span>(num % e == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; s;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">20</span>; ++i)</span><br><span class="line">        <span class="keyword">if</span>(check(s,i))</span><br><span class="line">            s.push_back(i);</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">1L</span>L;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> e : s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> m = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(m * e &lt;= <span class="number">20</span>)</span><br><span class="line">            m *= e;</span><br><span class="line">        ans *= m;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>答案</strong></p>
+<p>232792560</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_button_tumblr"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-python/grammar-5" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2018/06/11/python/grammar-5/" itemprop="url">
+            <img src="/images/python/Python-banner.png" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/06/11/python/grammar-5/">Python3 学习之路(5) 列表、元组与字典</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/06/11/python/grammar-5/">
+            <time datetime="2018-06-10T16:02:38.000Z" itemprop="datePublished">2018-06-11</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Python/">Python</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Python/">Python</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><p>可以理解为列表为可变的数组，不过Python中的列表较之灵活许多。</p>
+<h2 id="访问改动"><a href="#访问改动" class="headerlink" title="访问改动"></a>访问改动</h2><p>使用下标索引来访问并改动列表中的值，同样你也可以使用方括号的形式截取字符，访问并改动，超出范围则会报错。</p>
+<h3 id="index-obj"><a href="#index-obj" class="headerlink" title="index(obj)"></a>index(obj)</h3><p>返回目标列表中obj出现的位置，如果没有则抛出异常。</p>
+<h2 id="增减"><a href="#增减" class="headerlink" title="增减"></a>增减</h2><h3 id="append-obj"><a href="#append-obj" class="headerlink" title="append(obj)"></a>append(obj)</h3><p>向目标列表的最后添加一个元素。</p>
+<h3 id="extend-seq"><a href="#extend-seq" class="headerlink" title="extend(seq)"></a>extend(seq)</h3><p>向目标列表的最后添加如干个元素，seq要是一个可迭代的参数。</p>
+<h3 id="insert-index-obj"><a href="#insert-index-obj" class="headerlink" title="insert(index,obj)"></a>insert(index,obj)</h3><p>向目标列表指定位置插入一个元素。</p>
+<h3 id="del"><a href="#del" class="headerlink" title="del"></a>del</h3><p>可以使用 del 语句来删除列表的的元素，可以删除整个列表，也可以通过下标索引来删除列表中的某个或某些元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">list = [<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>,<span class="string">'D'</span>,<span class="string">'E'</span>,<span class="string">'F'</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">del</span> list[<span class="number">0</span>] <span class="comment"># 删除一个元素 </span></span><br><span class="line">print(list) <span class="comment"># 输出['B', 'C', 'D', 'E', 'F'] </span></span><br><span class="line"><span class="keyword">del</span> list[<span class="number">1</span>:<span class="number">3</span>] <span class="comment"># 删除一些元素 </span></span><br><span class="line">print(list) <span class="comment"># 输出['B', 'E', 'F'] </span></span><br><span class="line"><span class="keyword">del</span> list <span class="comment"># 删除整个列表</span></span><br></pre></td></tr></table></figure>
+<h3 id="remove-obj"><a href="#remove-obj" class="headerlink" title="remove(obj)"></a>remove(obj)</h3><p>移除目标列表的指定元素，找不到则抛出异常。</p>
+<h3 id="pop-index-1"><a href="#pop-index-1" class="headerlink" title="pop([index=-1])"></a>pop([index=-1])</h3><p>移除列表中的一个元素（默认最后一个元素），并且返回该元素的值，没有值可以返回则抛出异常。</p>
+<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><p>列表的操作与字符串运算符的种类和效果基本相同，此处不表，请参照之前的文章。</p>
+<h2 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h2><h3 id="len-list"><a href="#len-list" class="headerlink" title="len(list)"></a>len(list)</h3><p>返回列表元素个数。</p>
+<h3 id="clear"><a href="#clear" class="headerlink" title="clear()"></a>clear()</h3><p>清除目标列表的所有元素。</p>
+<h3 id="max-list-min-list"><a href="#max-list-min-list" class="headerlink" title="max(list) min(list)"></a>max(list) min(list)</h3><p>返回列表元素的最大/小值，如果列表中的元素不是一种类型或者没有重载小于号，会报错。<br>当列表中元素均是一种类型，可以通过此类型的默认排序获得结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list = [[<span class="number">1</span>,<span class="number">2</span>],[<span class="number">4</span>,<span class="number">4</span>],[<span class="number">4</span>,<span class="number">2</span>,<span class="number">2</span>]]</span><br><span class="line">print(max(list)) <span class="comment"># 输出[4,4] 即先比较第一个数，再比较第二个数</span></span><br></pre></td></tr></table></figure>
+<h3 id="sort-cmp-None-key-None-reverse-False"><a href="#sort-cmp-None-key-None-reverse-False" class="headerlink" title="sort(cmp=None, key=None, reverse=False)"></a>sort(cmp=None, key=None, reverse=False)</h3><p>对原列表进行排序，不返回值。</p>
+<ul>
+<li>cmp 可选参数, 如果指定了该参数会使用该参数的方法进行排序。</li>
+<li>key 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。</li>
+<li>reverse 排序规则，reverse = True 降序， reverse = False 升序（默认）。</li>
+</ul>
+<p>sort还可以搭配类中重载小于号的方式来使用，此处按下不表。</p>
+<h1 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h1><p>可以理解为元组为不可变的数组，目的是为了代码的安全性。</p>
+<h2 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h2><p>使用下标索引来访问元组中的值。</p>
+<h2 id="改动"><a href="#改动" class="headerlink" title="改动"></a>改动</h2><p>元组中的元素值是不允许修改的，但我们可以对元组进行连接组合。</p>
+<h2 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h2><p>元组中的元素值是不允许删除的，但我们可以使用del语句来删除整个元组。</p>
+<h2 id="操作符-1"><a href="#操作符-1" class="headerlink" title="操作符"></a>操作符</h2><p>元组的操作与字符串运算符的种类和效果基本相同，此处不表，请参照之前的文章。</p>
+<h2 id="其他函数-1"><a href="#其他函数-1" class="headerlink" title="其他函数"></a>其他函数</h2><p>元组同列表一样拥有len()、min()、max()等函数。</p>
+<h1 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h1><p>字典同其他主流编程语言的map一样，是一种key->value的容器，查询速度很快。<br>要注意的是，key要是唯一的且不可变，但value不一定。如果重复对一个key进行改动，则会把旧的抛弃，更新为新的。</p>
+<h2 id="访问-1"><a href="#访问-1" class="headerlink" title="访问"></a>访问</h2><p>使用下标索引(key)来访问字典中的值。没有会报错。</p>
+<h2 id="改动-1"><a href="#改动-1" class="headerlink" title="改动"></a>改动</h2><p>使用下标索引(key)来更新元组中的值。</p>
+<h2 id="删除-1"><a href="#删除-1" class="headerlink" title="删除"></a>删除</h2><p>有三种方法可以不同程度上的删除字典。</p>
+<h3 id="del-dict"><a href="#del-dict" class="headerlink" title="del dict[]"></a>del dict[]</h3><p>删除字典里的一对key->value的元素。</p>
+<h3 id="clear-1"><a href="#clear-1" class="headerlink" title="clear()"></a>clear()</h3><p>删除字典里面的所有元素。</p>
+<h3 id="del-dict-1"><a href="#del-dict-1" class="headerlink" title="del dict"></a>del dict</h3><p>删除整个字典。dsadsadsadsa</p>
+<h2 id="其他函数-2"><a href="#其他函数-2" class="headerlink" title="其他函数"></a>其他函数</h2><h3 id="len-dict"><a href="#len-dict" class="headerlink" title="len(dict)"></a>len(dict)</h3><p>计算字典元素个数，即键的总数。</p>
+<h3 id="str-dict"><a href="#str-dict" class="headerlink" title="str(dict)"></a>str(dict)</h3><p>输出字典，以可打印的字符串表示。</p>
+<h3 id="fromkeys"><a href="#fromkeys" class="headerlink" title="fromkeys()"></a>fromkeys()</h3><p>创建一个新字典，以序列seq中元素做字典的键，val为字典所有键对应的初始值。</p>
+<h3 id="get-key-default-None"><a href="#get-key-default-None" class="headerlink" title="get(key, default=None)"></a>get(key, default=None)</h3><p>返回指定键的值，如果值不在字典中返回default值。</p>
+<h3 id="items"><a href="#items" class="headerlink" title="items()"></a>items()</h3><p>以列表返回可遍历的(键, 值) 元组数组。</p>
+<h3 id="setdefault-key-default-None"><a href="#setdefault-key-default-None" class="headerlink" title="setdefault(key, default=None)"></a>setdefault(key, default=None)</h3><p>和get()类似, 但如果键不存在于字典中，将会添加键并将值设为default。</p>
+<h3 id="pop-key-default"><a href="#pop-key-default" class="headerlink" title="pop(key[,default])"></a>pop(key[,default])</h3><p>删除字典给定键 key 所对应的值，返回值为被删除的值。key值必须给出。 否则，返回default值。</p>
+<h3 id="keys-values"><a href="#keys-values" class="headerlink" title="keys()/values()"></a>keys()/values()</h3><p>以列表返回一个字典所有的键/值。</p>
+<hr>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><ol>
+<li><a href="http://www.runoob.com/python3/python3-list.html" target="_blank" rel="noopener">http://www.runoob.com/python3/python3-list.html</a></li>
+<li><a href="http://www.runoob.com/python3/python3-tuple.html" target="_blank" rel="noopener">http://www.runoob.com/python3/python3-tuple.html</a></li>
+<li><a href="http://www.runoob.com/python3/python3-dictionary.html" target="_blank" rel="noopener">http://www.runoob.com/python3/python3-dictionary.html</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316724772904521142196b74a3f8abf93d8e97c6ee6000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/0014316724772904521142196b74a3f8abf93d8e97c6ee6000</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143167793538255adf33371774853a0ef943280573f4d000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143167793538255adf33371774853a0ef943280573f4d000</a></li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_button_tumblr"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-python/grammar-4" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2018/06/10/python/grammar-4/" itemprop="url">
+            <img src="/images/python/Python-banner.png" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/06/10/python/grammar-4/">Python3 学习之路(4) 字符串</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/06/10/python/grammar-4/">
+            <time datetime="2018-06-10T08:19:34.000Z" itemprop="datePublished">2018-06-10</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Python/">Python</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Python/">Python</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>在Python3中，字符串在内存中的存储格式均是Unicode。且其实不存在单个字符，单个字符也被视为字符串。</p>
+<h2 id="编码与解码"><a href="#编码与解码" class="headerlink" title="编码与解码"></a>编码与解码</h2><p>对于许多编程语言来说，字符串的各类编码是一个很让人难以处理的问题，在Python中，用了很好的封装方式，字符串的编码与解码不再是令人头疼的问题。</p>
+<h3 id="encode"><a href="#encode" class="headerlink" title="encode()"></a>encode()</h3><p>python使用encode()方法来进行字符串的编码。这个方法将一个字符串编码成指定编码格式，返回值是bytes类型。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bytes_string = <span class="string">'中文'</span>.encode(<span class="string">'utf-8'</span>)</span><br></pre></td></tr></table></figure>
+<p>如果你对含有超出ASCII编码外的字符（比如说，中文）的字符串编码为ASCII，则Python会报错，解决方法是告知Python如何进行处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bytes_string = <span class="string">'中文CN'</span>.encode(<span class="string">'ascii'</span>,errors=<span class="string">'ignore'</span>)</span><br></pre></td></tr></table></figure>
+<p>这里我将encode()中errors参数的值设置为’ignore’，即对错误的字节进行忽略，返回值为ASCII编码的bytes，意为CN。</p>
+<h3 id="decode"><a href="#decode" class="headerlink" title="decode()"></a>decode()</h3><p>python使用decode()方法来进行字符串的编码。这个方法将一个bytes根据指定编码格式进行解码，返回值是一个字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string = <span class="string">b'\xe4\xb8\xad\xe6\x96\x87'</span>.decode(<span class="string">'utf-8'</span>)</span><br></pre></td></tr></table></figure>
+<p>如果进行上面的encode()实验，很容易知道这里的<strong>b’\xe4\xb8\xad\xe6\x96\x87’</strong>是UTF-8编码格式下的’中文’，这里相当于上面的逆过程。</p>
+<p>同样的，如果bytes里有含有超出指定编码外的字符，Python也会报错，解决方法也是同样告知如何进行处理。</p>
+<h2 id="转义字符表"><a href="#转义字符表" class="headerlink" title="转义字符表"></a>转义字符表</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">转义字符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">(在行尾时)</td>
+<td style="text-align:center">续行符</td>
+</tr>
+<tr>
+<td style="text-align:center">\</td>
+<td style="text-align:center">反斜杠符号</td>
+</tr>
+<tr>
+<td style="text-align:center">\\’</td>
+<td style="text-align:center">单引号</td>
+</tr>
+<tr>
+<td style="text-align:center">\\”</td>
+<td style="text-align:center">双引号</td>
+</tr>
+<tr>
+<td style="text-align:center">\a</td>
+<td style="text-align:center">响铃</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">退格(Backspace)</td>
+</tr>
+<tr>
+<td style="text-align:center">\e</td>
+<td style="text-align:center">转义</td>
+</tr>
+<tr>
+<td style="text-align:center">\000</td>
+<td style="text-align:center">空</td>
+</tr>
+<tr>
+<td style="text-align:center">\n</td>
+<td style="text-align:center">换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\v</td>
+<td style="text-align:center">纵向制表符</td>
+</tr>
+<tr>
+<td style="text-align:center">\t</td>
+<td style="text-align:center">横向制表符</td>
+</tr>
+<tr>
+<td style="text-align:center">\r</td>
+<td style="text-align:center">回车</td>
+</tr>
+<tr>
+<td style="text-align:center">\f</td>
+<td style="text-align:center">换页</td>
+</tr>
+<tr>
+<td style="text-align:center">\oyy</td>
+<td style="text-align:center">八进制数，yy代表的字符，例如：\o12代表换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\xyy</td>
+<td style="text-align:center">十六进制数，yy代表的字符，例如：\x0a代表换行</td>
+</tr>
+<tr>
+<td style="text-align:center">\other</td>
+<td style="text-align:center">其它的字符以普通格式输出</td>
+</tr>
+</tbody>
+</table>
+<h2 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h2><p>下表实例变量a值为字符串 “Hello”，b变量值为 “Python”：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">操作符</th>
+<th style="text-align:center">描述</th>
+<th style="text-align:center">实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">字符串连接</td>
+<td style="text-align:center">a + b 输出结果： HelloPython</td>
+</tr>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">重复输出字符串</td>
+<td style="text-align:center">a*2 输出结果：HelloHello</td>
+</tr>
+<tr>
+<td style="text-align:center">[]</td>
+<td style="text-align:center">通过索引获取字符串中字符</td>
+<td style="text-align:center">a[1] 输出结果 <strong>e</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">[ : ]</td>
+<td style="text-align:center">截取字符串中的一部分</td>
+<td style="text-align:center">a[1:4] 输出结果 <strong>ell</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">in</td>
+<td style="text-align:center">成员运算符 - 如果字符串中包含给定的字符返回 True</td>
+<td style="text-align:center"><strong>‘H’ in a</strong> 输出结果 True</td>
+</tr>
+<tr>
+<td style="text-align:center">not in</td>
+<td style="text-align:center">成员运算符 - 如果字符串中不包含给定的字符返回 True</td>
+<td style="text-align:center"><strong>‘M’ not in a</strong> 输出结果 True</td>
+</tr>
+</tbody>
+</table>
+<h2 id="格式化字符串"><a href="#格式化字符串" class="headerlink" title="格式化字符串"></a>格式化字符串</h2><p>Python支持格式化字符串的输出，语法与C语言的printf()函数基本相同。</p>
+<p>python字符串格式化符号:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%c</td>
+<td style="text-align:center">格式化字符及其ASCII码</td>
+</tr>
+<tr>
+<td style="text-align:center">%s</td>
+<td style="text-align:center">格式化字符串</td>
+</tr>
+<tr>
+<td style="text-align:center">%d</td>
+<td style="text-align:center">格式化整数</td>
+</tr>
+<tr>
+<td style="text-align:center">%u</td>
+<td style="text-align:center">格式化无符号整型</td>
+</tr>
+<tr>
+<td style="text-align:center">%o</td>
+<td style="text-align:center">格式化无符号八进制数</td>
+</tr>
+<tr>
+<td style="text-align:center">%x</td>
+<td style="text-align:center">格式化无符号十六进制数</td>
+</tr>
+<tr>
+<td style="text-align:center">%X</td>
+<td style="text-align:center">格式化无符号十六进制数（大写）</td>
+</tr>
+<tr>
+<td style="text-align:center">%f</td>
+<td style="text-align:center">格式化浮点数字，可指定小数点后的精度</td>
+</tr>
+<tr>
+<td style="text-align:center">%e</td>
+<td style="text-align:center">用科学计数法格式化浮点数</td>
+</tr>
+<tr>
+<td style="text-align:center">%E</td>
+<td style="text-align:center">作用同%e，用科学计数法格式化浮点数</td>
+</tr>
+<tr>
+<td style="text-align:center">%g</td>
+<td style="text-align:center">%f和%e的简写</td>
+</tr>
+<tr>
+<td style="text-align:center">%G</td>
+<td style="text-align:center">%f 和 %E 的简写</td>
+</tr>
+<tr>
+<td style="text-align:center">%p</td>
+<td style="text-align:center">用十六进制数格式化变量的地址</td>
+</tr>
+</tbody>
+</table>
+<p>格式化操作符辅助指令:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">定义宽度或者小数点精度</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td style="text-align:center">用做左对齐</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">在正数前面显示加号( + )</td>
+</tr>
+<tr>
+<td style="text-align:center">#</td>
+<td style="text-align:center">在八进制数前面显示零(‘0’)，在十六进制前面显示’0x’或者’0X’(取决于用的是’x’还是’X’)</td>
+</tr>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">显示的数字前面填充’0’而不是默认的空格</td>
+</tr>
+<tr>
+<td style="text-align:center">%</td>
+<td style="text-align:center">‘%%’输出一个单一的’%’</td>
+</tr>
+<tr>
+<td style="text-align:center">m.n</td>
+<td style="text-align:center">m 是显示的最小总宽度,n 是小数点后的位数(如果可用的话)</td>
+</tr>
+</tbody>
+</table>
+<p>样例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'%c'</span> % <span class="string">'a'</span>) <span class="comment">#输出一个字符，如果不是字符会报错 </span></span><br><span class="line">print(<span class="string">'%x'</span> % <span class="number">16</span>) <span class="comment">#16进制下的16，没有前缀表明进制 </span></span><br><span class="line">print(<span class="string">'%04d'</span> % <span class="number">20</span>) <span class="comment">#输出占位4格的数字，未满4位前补0 </span></span><br><span class="line">print(<span class="string">'%+-4d'</span> % <span class="number">20</span>) <span class="comment">#左对齐的，在正数前面补'+'号的占位4格的数字 </span></span><br><span class="line">print(<span class="string">'%10.6f'</span> % <span class="number">12.98765</span>) <span class="comment">#占位10格(包括'.')，小数点后至少6位的数字</span></span><br></pre></td></tr></table></figure>
+<h3 id="format"><a href="#format" class="headerlink" title="format"></a>format</h3><p>Python2.6开始支持使用format()函数来格式化字符串。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'&#123;0:4d&#125;-&#123;1:02d&#125;-&#123;2:d&#125;'</span>.format(<span class="number">1926</span>,<span class="number">8</span>,<span class="number">17</span>)) <span class="comment">#输出 1926-08-17</span></span><br></pre></td></tr></table></figure>
+<h2 id="字符串内建函数"><a href="#字符串内建函数" class="headerlink" title="字符串内建函数"></a>字符串内建函数</h2><h3 id="capitalize"><a href="#capitalize" class="headerlink" title="capitalize()"></a>capitalize()</h3><p>将字符串的第一个字符转换为大写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">'hello world'</span> </span><br><span class="line">print(str1.capitalize()) <span class="comment"># 返回 Hello world</span></span><br><span class="line">str2 = <span class="string">'123hello world'</span> </span><br><span class="line">print(str2.capitalize()) <span class="comment"># 返回 123hello world</span></span><br></pre></td></tr></table></figure>
+<h3 id="center-width-fillchar"><a href="#center-width-fillchar" class="headerlink" title="center(width, fillchar)"></a>center(width, fillchar)</h3><p>返回一个指定的宽度width居中的字符串，fillchar为填充的字符，默认为空格。</p>
+<h3 id="count-str-beg-0-end-len-string"><a href="#count-str-beg-0-end-len-string" class="headerlink" title="count(str, beg= 0,end=len(string))"></a>count(str, beg= 0,end=len(string))</h3><p>返回 str 在字符串里面出现的次数，如果beg或者end指定则返回指定范围内str出现的次数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="string">'where which why who when'</span> </span><br><span class="line">print(str.count(<span class="string">'wh'</span>)) <span class="comment">#返回5</span></span><br></pre></td></tr></table></figure>
+<h3 id="startswith-endswith-suffix-beg-0-end-len-string"><a href="#startswith-endswith-suffix-beg-0-end-len-string" class="headerlink" title="startswith/endswith(suffix, beg=0, end=len(string))"></a>startswith/endswith(suffix, beg=0, end=len(string))</h3><p>检查字符串是否以suffix开始/结束，如果beg或者end指定则检查指定的范围内是否以suffix开始/结束，如果是，返回True，否则返回False。</p>
+<h3 id="expandtabs-tabsize-8"><a href="#expandtabs-tabsize-8" class="headerlink" title="expandtabs(tabsize=8)"></a>expandtabs(tabsize=8)</h3><p>把字符串 string 中的 tab 符号转为空格，tab 符号默认的空格数是 8 。</p>
+<h3 id="find-str-beg-0-end-len-string"><a href="#find-str-beg-0-end-len-string" class="headerlink" title="find(str, beg=0 end=len(string))"></a>find(str, beg=0 end=len(string))</h3><p>检测str是否包含在字符串中，如果指定范围beg和end，则检查是否包含在指定范围内，如果包含返回开始的索引值，否则返回-1。</p>
+<h3 id="index-str-beg-0-end-len-string"><a href="#index-str-beg-0-end-len-string" class="headerlink" title="index(str, beg=0, end=len(string))"></a>index(str, beg=0, end=len(string))</h3><p>跟find()方法一样，只不过如果str不在字符串中会报一个异常。</p>
+<h3 id="isalnum"><a href="#isalnum" class="headerlink" title="isalnum()"></a>isalnum()</h3><p>如果字符串至少有一个字符并且所有字符都是字母或数字则返回True，否则返回False。</p>
+<h3 id="isalpha"><a href="#isalpha" class="headerlink" title="isalpha()"></a>isalpha()</h3><p>如果字符串至少有一个字符并且所有字符都是字母则返回True，否则返回False。</p>
+<h3 id="isdigit-isdecimal-isnumeric"><a href="#isdigit-isdecimal-isnumeric" class="headerlink" title="isdigit() isdecimal() isnumeric()"></a>isdigit() isdecimal() isnumeric()</h3><p>如果字符串只包含数字则返回True，否则返回False。</p>
+<p>这三个在细节上有很多不同的地方，具体请参照引用3的博文，这里只给出结论。</p>
+<ul>
+<li>isdigit()<br>True: Unicode数字，byte数字（单字节），全角数字（双字节），罗马数字（英文）<br>False: 汉字数字、罗马数字<br>Error: 无</li>
+<li>isdecimal()<br>True: Unicode数字，全角数字（双字节）<br>False: 罗马数字（英文），汉字数字，罗马数字<br>Error: byte数字（单字节）</li>
+<li>isnumeric()<br>True: Unicode数字，全角数字（双字节），罗马数字（英文），汉字数字、罗马数字<br>False: 无<br>Error: byte数字（单字节）</li>
+</ul>
+<h3 id="isspace"><a href="#isspace" class="headerlink" title="isspace()"></a>isspace()</h3><p>如果字符串中只包含空白，则返回True，否则返回False。</p>
+<h3 id="join-seq"><a href="#join-seq" class="headerlink" title="join(seq)"></a>join(seq)</h3><p>以指定字符串作为分隔符，传入的参数，迭代器seq中的所有变量的字符串表示合并为一个字符串返回。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seq = <span class="string">'-'</span> </span><br><span class="line">print(seq.join( (<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>) )) <span class="comment">#返回A-B-C</span></span><br></pre></td></tr></table></figure>
+<h3 id="len-string"><a href="#len-string" class="headerlink" title="len(string)"></a>len(string)</h3><p>返回字符串长度。</p>
+<h3 id="ljust-width-fillchar"><a href="#ljust-width-fillchar" class="headerlink" title="ljust(width[, fillchar])"></a>ljust(width[, fillchar])</h3><p>返回一个原字符串左对齐，并使用fillchar填充至长度width的新字符串，fillchar默认为空格。</p>
+<h3 id="lower"><a href="#lower" class="headerlink" title="lower()"></a>lower()</h3><p>转换字符串中所有大写字符为小写。</p>
+<h3 id="replace-old-new-max"><a href="#replace-old-new-max" class="headerlink" title="replace(old, new [, max])"></a>replace(old, new [, max])</h3><p>把将目标字符串中的old子串替换成new子串,如果max指定，则替换不超过max次。</p>
+<h3 id="split-str-”-“-num-string-count-str"><a href="#split-str-”-“-num-string-count-str" class="headerlink" title="split(str=” “, num=string.count(str))"></a>split(str=” “, num=string.count(str))</h3><p>num=string.count(str)) 以str为分隔符截取字符串，如果num有指定值，则仅截取num个子字符串。<br>这个的默认.split()意即按空格截取字符串。</p>
+<h3 id="splitlines-keepends-False"><a href="#splitlines-keepends-False" class="headerlink" title="splitlines(keepends=False)"></a>splitlines(keepends=False)</h3><p>返回字符串的行数，按照换行符切割目标字符串。<br>如果没设定keepends=True，则会将换行符从返回的字符串组中移除。</p>
+<hr>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><ol>
+<li><a href="http://www.runoob.com/python3/python3-string.html" target="_blank" rel="noopener">http://www.runoob.com/python3/python3-string.html</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431664106267f12e9bef7ee14cf6a8776a479bdec9b9000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431664106267f12e9bef7ee14cf6a8776a479bdec9b9000</a></li>
+<li><a href="https://www.cnblogs.com/jebeljebel/p/4006433.html" target="_blank" rel="noopener">https://www.cnblogs.com/jebeljebel/p/4006433.html</a></li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_button_tumblr"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-reproduce/literature/TengWangGeXu-HaiShangGangQinShi-2" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<a href="/2018/06/10/reproduce/literature/TengWangGeXu-HaiShangGangQinShi-2/" itemprop="url">
+            <img src="/images/reproduce/literature/TengWangGeXu-banner.png" class="article-banner" />
+        </a>
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2018/06/10/reproduce/literature/TengWangGeXu-HaiShangGangQinShi-2/">美文系列：滕王阁序(2)</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/06/10/reproduce/literature/TengWangGeXu-HaiShangGangQinShi-2/">
+            <time datetime="2018-06-09T19:29:55.000Z" itemprop="datePublished">2018-06-10</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/文学/">文学</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/文学/">文学</a>, <a class="tag-link" href="/tags/滕王阁序/">滕王阁序</a>, <a class="tag-link" href="/tags/转载/">转载</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>本文系转载，已征得原文作者同意，特此声明。<br>原文作者：海上钢琴师<br>原文链接：<a href="http://www.acfun.cn/a/ac4162716" target="_blank" rel="noopener">http://www.acfun.cn/a/ac4162716</a></p>
+<hr>
+<p><strong>时维九月，序属三秋。潦水尽而寒潭清，烟光凝而暮山紫。俨骖騑于上路，访风景于崇阿。临帝子之长洲，得仙人之旧馆。层峦耸翠，上出重霄；飞阁流丹，下临无地。鹤汀凫渚，穷岛屿之萦回；桂殿兰宫，即冈峦之体势。</strong></p>
+<p><strong>披绣闼，俯雕甍，山原旷其盈视，川泽纡其骇瞩。闾阎扑地，钟鸣鼎食之家；舸舰迷津，青雀黄龙之舳。云销雨霁，彩彻区明。落霞与孤鹜齐飞，秋水共长天一色。渔舟唱晚，响穷彭蠡之滨，雁阵惊寒，声断衡阳之浦。</strong></p>
+<p>第二三段在有些书上会合并为一段，总体来说是写景。开篇之后，既然背景已经交代清楚，那就要先从客观角度出发，来描绘这场盛会、这座楼阁了。从文字角度而言，这是全篇中最为华彩的一段，其中的几段名句，更是垂千古而不朽。</p>
+<p><strong>时维九月，序属三秋。</strong></p>
+<p>开始一句，就点名了现在的具体时间——农历九月，也就是所谓的三秋时节。按照古代农历，七八九月为秋季，三秋已经是秋天的最末，眼看就要进入冬天了。如果是在王勃的故乡山西，这时候已经是“秋风萧瑟天气凉，草木摇落露为霜”的时候了吧。</p>
+<p>但江南气候毕竟更加温和。“青山隐隐水迢迢，秋尽江南草未凋”，这时候的南昌城，草木还没有凋零，气候不冷不热，鱼蟹肥美，新酒方熟，正是舒适惬意的季节，最适合好友齐聚、登楼远眺、把酒临风，尽情抒发自己的胸怀。</p>
+<p><strong>潦水尽而寒潭清，烟光凝而暮山紫。</strong></p>
+<p>秋天的空气和夏天不同。夏季的空气闷热潮湿，远处的山峦都朦胧在水汽之中，看不清楚。丰沛的雨水让山上满是临时诞生的小溪，夹杂着落叶潺潺而下，让山脚下的潭水都变得有些浑浊了。</p>
+<p>但随着秋意的浸染，这些小溪逐渐消失，山下的潭水越发的青碧深幽，仿佛是一面碧玉磨成的镜子一样。天高气爽，笼罩着山川的水气消散了，一眼看去，山峦的形状一览无遗，山上的秋叶在夕阳映照下，显得分外红艳。</p>
+<p>古人曾经评论说，这两句“写尽九月之景”，确实如此。呼应前两句对时间的描述，一幅完美的深秋画卷已经展开在我们面前。</p>
+<p><strong>俨骖騑于上路，访风景于崇阿。临帝子之长洲，得仙人之旧馆。</strong></p>
+<p>前面几句还算是开篇静态画面的话，从这句开始，一幕绝美的电影、一个经典的长镜头开始了——</p>
+<p>俨骖騑于上路，骖，是左马；騑，是右马。驾着双马拉的马车，王勃开始了他的旅程。能驾双马的马车，相当于现在年轻人开着一辆超跑，是一件很有格调的事儿。要是开到三驾、四驾的马车，那就是高级别的官员了。</p>
+<p>上路，说的不是王勃专门上单，而是呼应前面提到的暮山，指的是山上的路。驾着双马的超跑，从刚才描述的秋山路上驶来，带起一地的红叶……这就是秋名山老司机、社会我王哥啊！</p>
+<p>访风景于崇阿，崇阿，指崇山峻岭，这个词大有来历。大家都知道王羲之的《兰亭序》，但兰亭序是什么场合下写的？是王羲之、谢安等一群好哥们一起喝酒赛诗，最后给诗集做的序。只不过这篇序名气太大，以至于大家把后面的几十首诗都忽略了。</p>
+<p>但在兰亭会中，主角其实还是这几十首诗。其中被评为当日第一的，是谢安弟弟谢万所写的《兰亭》诗，开头第一句就是“肆眺崇阿，寓目高林”。王羲之在序里说“此地有崇山峻岭，茂林修竹”，呼应的就是这一句。</p>
+<p>所以，王哥开着超跑，一路上还在寻花问柳……啊不对，寻访沿途的风景。这一路走着看着，眼前突然出现了一个绝美的去处。</p>
+<p>这个去处，就是矗立在赣江江畔的帝子之长洲、天人之旧馆。滕王阁是唐帝国的亲王所建，所以夸一句帝子之长洲，完全没有问题。临字有多种含义，从山上往下望叫临，从外地而来叫临，突然见到这座楼台叫临，靠近水边的沙洲也叫临，但每一个解释都贴合这一句，可谓绝妙。</p>
+<p>当时滕王阁修了并没多少年。之所以用旧字，一是惋惜当时修阁的滕王已经不在了，有睹物思人之情；二是将滕王阁比喻为天上仙人的居所，只不过被仙人遗留在此，更是夸耀了滕王阁人间难得的盛景。</p>
+<p>把这几句连起来，我们能看到一个年轻人出门上路，寻访名山大川，峰回路转之时，一座江边楼阁出现在他眼前。这座楼阁是如此华美，简直不像是人间的建筑。</p>
+<p>既然来到这座仙宫前了，那接下来，肯定是要好好观赏一番：</p>
+<p><strong>层峦耸翠，上出重霄；飞阁流丹，下临无地。</strong></p>
+<p>走近些看，这座仙宫起伏连绵，屋顶铺着翠绿的琉璃瓦，其高耸之处仿佛直上云霄一般。当年曹操修铜雀台，曹植做赋，其中写到“立中天之华观兮，连飞阁乎西城”，这里的飞阁指的就是那些高高的楼阁之间精细纤巧、涂成朱红色的长桥阁道。一场秋雨洗过，那浓厚鲜亮的颜色仿佛都快要流淌下来一样。楼阁下紧靠大江，看下去都是江水，不见地面，气势恢宏。</p>
+<p>远眺之后，就要逐渐走进这座仙宫了：</p>
+<p><strong>鹤汀凫渚，穷岛屿之萦回；桂殿兰宫，即冈峦之体势。</strong></p>
+<p>宫殿紧靠江畔，殿前的花园和水岸的沙洲结合在一起，走向楼阁的路就在花园里萦回曲折，常有白鹤、鸳鸯等水鸟在路边嬉戏遨游。殿外几树桂花，宫前遍植兰草，自有幽香缭绕在廊庑之间。整座仙宫的构造精巧，宫殿楼阁高低起伏，走势就如同远处的山脉一样。</p>
+<p>中国古代造园手法，从唐宋开始真正步入成熟，到明清时达到大成。滕王阁修建于唐初，但从这两句描述中可以看到，当时人们在如何利用自然环境造园、如何借用远处山景和园景融为一体方面，已经很有思路了。</p>
+<p>逛完园林，自然就开始登楼：</p>
+<p><strong>披绣闼，俯雕甍，山原旷其盈视，川泽纡其骇瞩。</strong></p>
+<p>绣闼，满是锦绣的门帘。虽然我们现在看那些景点不挂门帘，但古时候这都是人们生活起居的地方，挂门帘才是正常的。雕甍，精雕细琢的屋脊。同为初唐四杰的卢照邻说“双阙连甍垂凤翼”，指的就是唐代这种屋脊宽大、双侧自然下垂的宫殿造型。</p>
+<p>登到这座高耸的楼阁上，掀开西侧的锦缎门帘，扑面而来的是一幅壮丽景色。向下看，是矮处殿阁精美灿烂的屋脊。向远处看，是旷阔无际的原野、视野尽头的山峦。旷野之上，河流蜿蜒曲折，湖泊点缀其间，这种自然造物的美令人心醉神迷。</p>
+<p><strong>闾阎扑地，钟鸣鼎食之家；舸舰迷津，青雀黄龙之舳。</strong></p>
+<p>这句夸景色之美，同时也是夸耀南昌之富庶、宾客之高贵。滕王阁不是远郊外的景点，而是就在南昌城西，背靠雄城，面临大江。从楼上往东望，是鳞次栉比的屋舍。钟是编钟，是古代诸侯贵族宴会时旁边演奏的乐器。鼎是食器，古代诸侯们吃饭，每道菜单独放在一个小鼎里面，至少要有牛羊猪鱼鹿这五鼎食才叫大气上档次。钟鸣鼎食被王勃变成了一个成语，指这些人家都不是普通人家，而是堪比王侯的大富大贵之人。</p>
+<p>从楼上往西看，是滔滔的大江。江边停满了各种楼船——相当一部分自然也是楼上宾客们的座驾了。这些大船上有的绘着青雀，有的绘着黄龙，每一条都华美异常。需要注意的是，这里青雀不是简单的雀鸟，而是指传说中西王母驾前的神鸟，所以才能和黄龙所并列。后来李商隐说“蓬山此去无多路，青鸟殷勤为探看”，说的就是这个青雀。</p>
+<p><strong>云销雨霁，彩彻区明。落霞与孤鹜齐飞，秋水共长天一色。</strong></p>
+<p>这时候已经是邻近傍晚了。一场秋雨刚刚结束，乌云散去，澄空如洗，只剩下天边一抹被夕阳映成五彩的云霞。在这云霞的背景之上，一只孤独的鸟儿腾空而起，飞向天际。目光追随着鸟儿远去，她的身影越来越小，最终只看到在遥远的天边，大江和天际都在暮色中变得模糊，最终融合在一起，难分彼此。</p>
+<p>这里面有个很有趣的公案。王勃说的是孤鹜，可鹜是什么？是胖胖的水鸟，说好听了叫鸳鸯，说的不好听了叫野鸭子……这鸟都是成群结队活动的，也不善于长距离飞翔。所以为什么是一只孤单的胖野鸭飞过去，大家都很是费解。据说日本收藏的唐代抄本里面写作“孤雾”，但这又完全失去了动态的美感，这解释也不靠谱。</p>
+<p>我倒是觉得，王勃当时所形容的，很可能是白鹭、白鹤一类的水鸟。这种鸟身姿纤美，善于飞翔，最是能引发人的诗性。“晴空一鹤排云上，便引诗情到碧霄”，这个解释要更加应景的多。有可能在写的时候，误将鹭写成了鹜，所以才造成了这个误解。</p>
+<p>秋水共长天一色，这句里诞生出了水天一色这个成语，将水天之景写到了极致。后来的唐宋诗人们都喜欢写类似的诗句，比如“黄河远上白云间”、“孤帆远影碧空尽，唯见长江天际流”、“水随天去秋无际”、“江流天地外”、“洞庭秋水远连天”、“长江一洗放天青”等等，是诗人们最爱的意象。</p>
+<p>这两句一出，文章顿时如同从黑白默片变成彩色电影一样，一下子就活了、就有了颜色，不愧是被传诵不绝的千古名句！据说，闹小脾气的都督阎公听说这个年轻人挥笔写出了这一句时，不由得感叹说：“这是真正的天才啊！”于是赶快下楼和王勃见礼，并且站在他身边看他写完全篇。</p>
+<p><strong>渔舟唱晚，响穷彭蠡之滨，雁阵惊寒，声断衡阳之浦。</strong></p>
+<p>从艺术角度来说，这一句之美并不亚于上一句。上一句是有色，这一句是有声。承接上一句，当目光已经投向天边，看到茫茫天际时，刚才所见的满眼繁华富贵顿时变的渺小起来。身后酒席上的欢宴喧哗逐渐远去了，此时目光中只有天地，耳边只剩下彭蠡湖畔渔夫归家的歌声、天空中飞过雁群的鸣叫。歌声渐小，雁鸣渐远，画面渐渐变得宁静沉寂。</p>
+<p>从出发，到近观，到游园，到登楼，到俯瞰，到远眺，到东西巡视，到随着飞鸟极目天边。这个一气呵成的长镜头带我们饱览了滕王阁景物之壮美，最终归于一片寥廓之中。此情此景之下，我们自然会开始思索一些永恒的问题——天地至大不朽，人类渺小短暂，那我们的存在又有什么意义呢？</p>
+<p>这时候，大家也终于意识到，自己正在亲眼见证历史的发生，意识到今日之会，必将因这个年轻人、因这篇雄文而不朽。事实也的确如此。千年之后，滕王阁已经重建了数十次，当年的楼阁是什么样子，阎都督、宇文州牧、孟学士、王将军究竟是谁，早就无人知晓了。但这座楼阁、这些名字已经被牢记在文学史上，只要人类文明还在，就会一直流传下去，得到真正的永生。</p>
+<p>开始的嘲弄早已经不在了。所有人都围拢过来，等待着王勃写下新的篇章，等待着自己刚被文字洗礼过的心灵，被重重敲击的那一刻。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_button_tumblr"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-reproduce/literature/TengWangGeXu-HaiShangGangQinShi-3" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1030,6 +1972,82 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2018/07/29/Graphviz/GetStart-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Graphviz/Graphviz-thumbnail.png)" alt="Graphviz上手(2) 常用知识点" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphviz/">Graphviz</a></p>
+                            <p class="item-title"><a href="/2018/07/29/Graphviz/GetStart-2/" class="title">Graphviz上手(2) 常用知识点</a></p>
+                            <p class="item-date"><time datetime="2018-07-28T17:30:07.375Z" itemprop="datePublished">2018-07-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/28/Graphviz/GetStart-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Graphviz/Graphviz-thumbnail.png)" alt="Graphviz上手(1) 画图" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Graphviz/">Graphviz</a></p>
+                            <p class="item-title"><a href="/2018/07/28/Graphviz/GetStart-1/" class="title">Graphviz上手(1) 画图</a></p>
+                            <p class="item-date"><time datetime="2018-07-28T13:24:20.633Z" itemprop="datePublished">2018-07-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/28/TensorFlow/GetStart-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/TensorFlow/TensorFlow-thumbnail.png)" alt="TensorFlow上手(2) 第一个程序" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TensorFlow/">TensorFlow</a></p>
+                            <p class="item-title"><a href="/2018/07/28/TensorFlow/GetStart-2/" class="title">TensorFlow上手(2) 第一个程序</a></p>
+                            <p class="item-date"><time datetime="2018-07-27T19:01:12.352Z" itemprop="datePublished">2018-07-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/07/26/TensorFlow/GetStart-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/TensorFlow/TensorFlow-thumbnail.png)" alt="TensorFlow上手(1) 环境配置" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/TensorFlow/">TensorFlow</a></p>
+                            <p class="item-title"><a href="/2018/07/26/TensorFlow/GetStart-1/" class="title">TensorFlow上手(1) 环境配置</a></p>
+                            <p class="item-date"><time datetime="2018-07-26T08:01:32.000Z" itemprop="datePublished">2018-07-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2018/07/11/reproduce/literature/TengWangGeXu-HaiShangGangQinShi-1/" class="thumbnail">
     
     
@@ -1046,82 +2064,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/11/hello-world/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/wall.jpg)" alt="Hello World" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/其他/">其他</a></p>
-                            <p class="item-title"><a href="/2018/07/11/hello-world/" class="title">Hello World</a></p>
-                            <p class="item-date"><time datetime="2018-07-10T17:31:12.332Z" itemprop="datePublished">2018-07-11</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/04/algorithm/Project-Euler/021-025/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/algorithm/Project-Euler/project-euler-thumbnail.png)" alt="欧拉计划个人题解(021-025)" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/algorithm/">algorithm</a></p>
-                            <p class="item-title"><a href="/2018/07/04/algorithm/Project-Euler/021-025/" class="title">欧拉计划个人题解(021-025)</a></p>
-                            <p class="item-date"><time datetime="2018-07-03T20:43:18.000Z" itemprop="datePublished">2018-07-04</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/07/03/algorithm/Project-Euler/016-020/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/algorithm/Project-Euler/project-euler-thumbnail.png)" alt="欧拉计划个人题解(016-020)" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/algorithm/">algorithm</a></p>
-                            <p class="item-title"><a href="/2018/07/03/algorithm/Project-Euler/016-020/" class="title">欧拉计划个人题解(016-020)</a></p>
-                            <p class="item-date"><time datetime="2018-07-03T06:45:18.000Z" itemprop="datePublished">2018-07-03</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2018/06/11/algorithm/Project-Euler/006-010/" class="thumbnail">
-    
-    
-        <span style="background-image:url(/images/algorithm/Project-Euler/project-euler-thumbnail.png)" alt="欧拉计划个人题解(006-010)" class="thumbnail-image"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/algorithm/">algorithm</a></p>
-                            <p class="item-title"><a href="/2018/06/11/algorithm/Project-Euler/006-010/" class="title">欧拉计划个人题解(006-010)</a></p>
-                            <p class="item-date"><time datetime="2018-06-11T13:35:33.000Z" itemprop="datePublished">2018-06-11</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1131,7 +2073,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文学/">文学</a><span class="category-list-count">3</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Graphviz/">Graphviz</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TensorFlow/">TensorFlow</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文学/">文学</a><span class="category-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -1140,7 +2082,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">10</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">10</span></li></ul>
         </div>
     </div>
 
@@ -1149,7 +2091,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hello-World/">Hello World</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Project-Euler/">Project Euler</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文学/">文学</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滕王阁序/">滕王阁序</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">3</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphviz/">Graphviz</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hello-World/">Hello World</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Project-Euler/">Project Euler</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文学/">文学</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滕王阁序/">滕王阁序</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">3</span></li></ul>
         </div>
     </div>
 
@@ -1158,7 +2100,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">标签云</h3>
         <div class="widget tagcloud">
-            <a href="/tags/Hello-World/" style="font-size: 10px;">Hello World</a> <a href="/tags/Project-Euler/" style="font-size: 20px;">Project Euler</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/文学/" style="font-size: 15px;">文学</a> <a href="/tags/滕王阁序/" style="font-size: 15px;">滕王阁序</a> <a href="/tags/转载/" style="font-size: 15px;">转载</a>
+            <a href="/tags/Graphviz/" style="font-size: 12.5px;">Graphviz</a> <a href="/tags/Hello-World/" style="font-size: 10px;">Hello World</a> <a href="/tags/Project-Euler/" style="font-size: 17.5px;">Project Euler</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/TensorFlow/" style="font-size: 12.5px;">TensorFlow</a> <a href="/tags/algorithm/" style="font-size: 17.5px;">algorithm</a> <a href="/tags/文学/" style="font-size: 15px;">文学</a> <a href="/tags/滕王阁序/" style="font-size: 15px;">滕王阁序</a> <a href="/tags/转载/" style="font-size: 15px;">转载</a>
         </div>
     </div>
 
