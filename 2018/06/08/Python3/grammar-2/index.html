@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Python3 学习之路(2) 基础语法 | KylinEyes&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="你好，世界在工程下新建 main.py 文件，向文件写入 1print(&quot;你好，世界&quot;) 如果你的文件是UTF-8编码存储的，那么这个文件可以立即运行，如果不是，会报一个 SyntaxError 错误，我建议的解决方法是将存储的文件编码改成UTF-8 without BOM。 同时，我还建议在文件头加入一行#coding=utf-8，这样Python会以UTF-8编码解析此文件。而之前没有加入本行">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python3 学习之路(2) 基础语法">
+<meta property="og:url" content="https://kylineyes.github.io/2018/06/08/Python3/grammar-2/index.html">
+<meta property="og:site_name" content="KylinEyes&#39;s Blog">
+<meta property="og:description" content="你好，世界在工程下新建 main.py 文件，向文件写入 1print(&quot;你好，世界&quot;) 如果你的文件是UTF-8编码存储的，那么这个文件可以立即运行，如果不是，会报一个 SyntaxError 错误，我建议的解决方法是将存储的文件编码改成UTF-8 without BOM。 同时，我还建议在文件头加入一行#coding=utf-8，这样Python会以UTF-8编码解析此文件。而之前没有加入本行">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://kylineyes.github.io/images/Python3/Python-thumbnail.png">
+<meta property="og:updated_time" content="2018-12-15T13:36:16.903Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python3 学习之路(2) 基础语法">
+<meta name="twitter:description" content="你好，世界在工程下新建 main.py 文件，向文件写入 1print(&quot;你好，世界&quot;) 如果你的文件是UTF-8编码存储的，那么这个文件可以立即运行，如果不是，会报一个 SyntaxError 错误，我建议的解决方法是将存储的文件编码改成UTF-8 without BOM。 同时，我还建议在文件头加入一行#coding=utf-8，这样Python会以UTF-8编码解析此文件。而之前没有加入本行">
+<meta name="twitter:image" content="https://kylineyes.github.io/images/Python3/Python-thumbnail.png">
+    
+
+    
+        <link rel="alternate" href="/" title="KylinEyes&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                
+                <span class="site-title">KylinEyes&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/images/Personal/Blog.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/images/Personal/Blog.png" />
+            <h2 id="name">Kylineyes</h2>
+            <h3 id="title">Student</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>ShenZhen, China</span>
+            <a id="follow" target="_blank" href="https://github.com/Kylineyes">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                27
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                14
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <!--div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="/" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div-->
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Python3/grammar-2" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="/images/Python3/Python-banner.png" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Python3 学习之路(2) 基础语法
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2018/06/08/Python3/grammar-2/">
+            <time datetime="2018-06-07T17:27:17.000Z" itemprop="datePublished">2018-06-08</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Python/">Python</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Python/">Python</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+                <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#你好，世界"><span class="toc-number">1.</span> <span class="toc-text">你好，世界</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#命令提示符-终端下调用脚本"><span class="toc-number">2.</span> <span class="toc-text">命令提示符/终端下调用脚本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#标识符"><span class="toc-number">3.</span> <span class="toc-text">标识符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#保留字符"><span class="toc-number">4.</span> <span class="toc-text">保留字符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#行和缩进"><span class="toc-number">5.</span> <span class="toc-text">行和缩进</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#多行的语句"><span class="toc-number">5.1.</span> <span class="toc-text">多行的语句</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#引号"><span class="toc-number">6.</span> <span class="toc-text">引号</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注释"><span class="toc-number">7.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#转义字符"><span class="toc-number">8.</span> <span class="toc-text">转义字符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#引用"><span class="toc-number">9.</span> <span class="toc-text">引用</span></a></li></ol>
+                </div>
+            
+            <h1 id="你好，世界"><a href="#你好，世界" class="headerlink" title="你好，世界"></a>你好，世界</h1><p>在工程下新建 <strong>main.py</strong> 文件，向文件写入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"你好，世界"</span>)</span><br></pre></td></tr></table></figure>
+<p>如果你的文件是UTF-8编码存储的，那么这个文件可以立即运行，如果不是，会报一个 SyntaxError 错误，我建议的解决方法是将存储的文件编码改成UTF-8 without BOM。</p>
+<p>同时，我还建议在文件头加入一行<code>#coding=utf-8</code>，这样Python会以UTF-8编码解析此文件。而之前没有加入本行也能运行的原因是因为：Python3.X 源码文件默认使用UTF-8编码，所以可以正常解析中文，无需指定UTF-8编码。</p>
+<h1 id="命令提示符-终端下调用脚本"><a href="#命令提示符-终端下调用脚本" class="headerlink" title="命令提示符/终端下调用脚本"></a>命令提示符/终端下调用脚本</h1><p>在命令提示符/终端下，进入之前工程写好的 <strong>main.py</strong> 文件的目录，输入 <code>python main.py</code>，便可执行，我们称这种方式为脚本编程。</p>
+<h1 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h1><p>在 Python 里，标识符由字母、数字、下划线组成。</p>
+<p>在 Python 中，所有标识符可以包括英文、数字以及下划线(_)，但不能以数字开头。</p>
+<p>Python 中的标识符是区分大小写的。</p>
+<p>以下划线开头的标识符是有特殊意义的。以单下划线开头 _foo 的代表不能直接访问的类属性，需通过类提供的接口进行访问，不能用 from xxx import * 而导入；</p>
+<ul>
+<li>以双下划线开头的 __foo 代表类的私有成员</li>
+<li>以双下划线开头和结尾的 __foo__ 代表 Python 里特殊方法专用的标识，如 __init__() 代表类的构造函数。</li>
+</ul>
+<h1 id="保留字符"><a href="#保留字符" class="headerlink" title="保留字符"></a>保留字符</h1><p>下面的列表显示了在Python中的保留字。这些保留字不能用作常数或变数，或任何其他标识符名称。</p>
+<p>所有 Python 的关键字只包含小写字母。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+<th style="text-align:center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">and</td>
+<td style="text-align:center">exec</td>
+<td style="text-align:center">not</td>
+</tr>
+<tr>
+<td style="text-align:center">assert</td>
+<td style="text-align:center">finally</td>
+<td style="text-align:center">or</td>
+</tr>
+<tr>
+<td style="text-align:center">break</td>
+<td style="text-align:center">for</td>
+<td style="text-align:center">pass</td>
+</tr>
+<tr>
+<td style="text-align:center">class</td>
+<td style="text-align:center">from</td>
+<td style="text-align:center">print</td>
+</tr>
+<tr>
+<td style="text-align:center">continue</td>
+<td style="text-align:center">global</td>
+<td style="text-align:center">raise</td>
+</tr>
+<tr>
+<td style="text-align:center">def</td>
+<td style="text-align:center">if</td>
+<td style="text-align:center">return</td>
+</tr>
+<tr>
+<td style="text-align:center">del</td>
+<td style="text-align:center">import</td>
+<td style="text-align:center">try</td>
+</tr>
+<tr>
+<td style="text-align:center">elif</td>
+<td style="text-align:center">in</td>
+<td style="text-align:center">while</td>
+</tr>
+<tr>
+<td style="text-align:center">else</td>
+<td style="text-align:center">is</td>
+<td style="text-align:center">with</td>
+</tr>
+<tr>
+<td style="text-align:center">except</td>
+<td style="text-align:center">lambda</td>
+<td style="text-align:center">yield</td>
+</tr>
+</tbody>
+</table>
+<h1 id="行和缩进"><a href="#行和缩进" class="headerlink" title="行和缩进"></a>行和缩进</h1><p>Python的代码不使用大括号 {} 来控制逻辑、作用范围，而是适用行首的空白缩进来控制。<br>行首的空白缩进可以适用 Tab 或者空格来控制，每一个逻辑、作用范围的递进，需要保证相同的缩进量，譬如，一直缩进为4个空格的程序，进入一个判定，但是接下来的缩进量变成了5个空格，则会中断程序的运行。<br>缩进量在一开始就需要定下，然后之后要严格执行，一般建议4个空格作为单位缩进量，并且不要混用 Tab。</p>
+<h2 id="多行的语句"><a href="#多行的语句" class="headerlink" title="多行的语句"></a>多行的语句</h2><p>Python不使用像 C/C++ 一样强制要求分号作为一个语句的结束，在python中一般以新行作为语句的结束符。</p>
+<p>但是我们可以使用斜杠（ \）将一行的语句分为多行显示，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">total = a + \</span><br><span class="line">        b + \</span><br><span class="line">        c</span><br></pre></td></tr></table></figure>
+<p>语句中包含 [], {} 或 () 括号就不需要使用多行连接符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">days =  [<span class="string">'Monday'</span>,  <span class="string">'Tuesday'</span>,  <span class="string">'Wednesday'</span>,  </span><br><span class="line">			<span class="string">'Thursday'</span>,  <span class="string">'Friday'</span>]</span><br></pre></td></tr></table></figure>
+<p>Python 也可以同一行显示多条语句，方法是用分号 ; 分开，但极不建议这样做。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> <span class="string">'hello'</span>;<span class="keyword">print</span> <span class="string">'World'</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="引号"><a href="#引号" class="headerlink" title="引号"></a>引号</h1><p>Python 可以使用引号( ‘ )、双引号( “ )、三引号( ‘’’ 或 “”” ) 来表示字符串，引号的开始与结束必须的相同类型的。</p>
+<p>其中三引号可以由多行组成，编写多行文本的快捷语法，常用于文档字符串，在文件的特定地点，被当做注释。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">word =  <span class="string">'word'</span> </span><br><span class="line">sentence =  <span class="string">"这是一个句子。"</span> </span><br><span class="line">paragraph =  <span class="string">"""这是一个段落。</span></span><br><span class="line"><span class="string">包含了多个语句"""</span></span><br></pre></td></tr></table></figure>
+<h1 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h1><p>python中单行注释采用 # 开头。<br>注释可以在语句或表达式行末：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">answer =  <span class="string">"42"</span>  <span class="comment"># 这是一个注释</span></span><br></pre></td></tr></table></figure>
+<p>python 中多行注释使用三个单引号(‘’’)或三个双引号(“””)。</p>
+<h1 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h1><p>\可以转义很多字符，比如\n表示换行，\t表示制表符，字符\本身也要转义，所以\\表示的字符就是\</p>
+<p>如果字符串里面有很多字符都需要转义，就需要加很多\，为了简化，Python还允许用r’’表示’’内部的字符串默认不转义。</p>
+<hr>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><ol>
+<li><a href="http://www.runoob.com/python/python-basic-syntax.html" target="_blank" rel="noopener">http://www.runoob.com/python/python-basic-syntax.html</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431658624177ea4f8fcb06bc4d0e8aab2fd7aa65dd95000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431658624177ea4f8fcb06bc4d0e8aab2fd7aa65dd95000</a></li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+    <div class="a2a_kit a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share">Share</a>
+    <span class="a2a_divider"></span>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_button_tumblr"></a>
+</div>
+<script type="text/javascript" src="//static.addtoany.com/menu/page.js"></script>
+<style>
+    .a2a_menu {
+        border-radius: 4px;
+    }
+    .a2a_menu a {
+        margin: 2px 0;
+        font-size: 14px;
+        line-height: 16px;
+        border-radius: 4px;
+        color: inherit !important;
+        font-family: 'Microsoft Yahei';
+    }
+    #a2apage_dropdown {
+        margin: 10px 0;
+    }
+    .a2a_mini_services {
+        padding: 10px;
+    }
+    a.a2a_i,
+    i.a2a_i {
+        width: 122px;
+        line-height: 16px;
+    }
+    a.a2a_i .a2a_svg,
+    a.a2a_more .a2a_svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        vertical-align: top;
+        background-size: 16px;
+    }
+    a.a2a_i {
+        border: none !important;
+    }
+    a.a2a_menu_show_more_less {
+        margin: 0;
+        padding: 10px 0;
+        line-height: 16px;
+    }
+    .a2a_mini_services:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+    .a2a_mini_services{*+height:1%;}
+</style>
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/06/08/Python3/grammar-3/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    Python3 学习之路(3) 变量
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/06/07/Python3/grammar-1/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Python3 学习之路(1) 初识</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/12/17/C/Note-C-Traps-and-Pitfalls-3/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/C/C-Note-thumbnail.png)" alt="C Traps and Pitfalls 摘记(3)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/C/">C</a></p>
+                            <p class="item-title"><a href="/2018/12/17/C/Note-C-Traps-and-Pitfalls-3/" class="title">C Traps and Pitfalls 摘记(3)</a></p>
+                            <p class="item-date"><time datetime="2018-12-17T06:34:25.000Z" itemprop="datePublished">2018-12-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/12/17/C/Note-C-Traps-and-Pitfalls-2/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/C/C-Note-thumbnail.png)" alt="C Traps and Pitfalls 摘记(2)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/C/">C</a></p>
+                            <p class="item-title"><a href="/2018/12/17/C/Note-C-Traps-and-Pitfalls-2/" class="title">C Traps and Pitfalls 摘记(2)</a></p>
+                            <p class="item-date"><time datetime="2018-12-16T16:14:32.000Z" itemprop="datePublished">2018-12-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/12/15/C/Thinking-C-Traps-and-Pitfalls-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/C/C-Note-thumbnail.png)" alt="C Traps and Pitfalls 练习摘记(1)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/C/">C</a></p>
+                            <p class="item-title"><a href="/2018/12/15/C/Thinking-C-Traps-and-Pitfalls-1/" class="title">C Traps and Pitfalls 练习摘记(1)</a></p>
+                            <p class="item-date"><time datetime="2018-12-15T15:25:29.000Z" itemprop="datePublished">2018-12-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/10/07/Cplusplus/Note-Effective-Cpp-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/Cplusplus/Cplusplus-thumbnail.png)" alt="Effective C++ 摘记(1)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/C/">C++</a></p>
+                            <p class="item-title"><a href="/2018/10/07/Cplusplus/Note-Effective-Cpp-1/" class="title">Effective C++ 摘记(1)</a></p>
+                            <p class="item-date"><time datetime="2018-10-06T19:12:56.000Z" itemprop="datePublished">2018-10-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/08/09/C/Note-C-Traps-and-Pitfalls-1/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/C/C-Note-thumbnail.png)" alt="C Traps and Pitfalls 摘记(1)" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/C/">C</a></p>
+                            <p class="item-title"><a href="/2018/08/09/C/Note-C-Traps-and-Pitfalls-1/" class="title">C Traps and Pitfalls 摘记(1)</a></p>
+                            <p class="item-date"><time datetime="2018-08-09T13:35:39.000Z" itemprop="datePublished">2018-08-09</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Graphviz/">Graphviz</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qt/">Qt</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/TensorFlow/">TensorFlow</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/其他/">其他</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/文学/">文学</a><span class="category-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">11</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/C/">C++</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Graphviz/">Graphviz</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hello-World/">Hello World</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Project-Euler/">Project Euler</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Qt/">Qt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TensorFlow/">TensorFlow</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文学/">文学</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/滕王阁序/">滕王阁序</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载/">转载</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/C/" style="font-size: 16px;">C</a> <a href="/tags/C/" style="font-size: 12px;">C++</a> <a href="/tags/Graphviz/" style="font-size: 12px;">Graphviz</a> <a href="/tags/Hello-World/" style="font-size: 10px;">Hello World</a> <a href="/tags/Linux/" style="font-size: 14px;">Linux</a> <a href="/tags/Project-Euler/" style="font-size: 18px;">Project Euler</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/Qt/" style="font-size: 10px;">Qt</a> <a href="/tags/Shell/" style="font-size: 14px;">Shell</a> <a href="/tags/TensorFlow/" style="font-size: 12px;">TensorFlow</a> <a href="/tags/algorithm/" style="font-size: 18px;">algorithm</a> <a href="/tags/文学/" style="font-size: 14px;">文学</a> <a href="/tags/滕王阁序/" style="font-size: 14px;">滕王阁序</a> <a href="/tags/转载/" style="font-size: 14px;">转载</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 KylinEyes<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
